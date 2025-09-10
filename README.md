@@ -73,16 +73,8 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 - Thanks to all the amazing destinations in Uttarakhand
 - Built with love for travel enthusiasts
-
 ---
-
 **Made with ❤️ by Trippy Tales Team**
-# Add all files to staging
-git add .
-
-# Commit with descriptive message
-git commit -m "Initial commit: Complete Trippy Tales travel website
-
 Features:
 - Modern React + Vite + Tailwind CSS setup
 - Responsive design with mobile support
