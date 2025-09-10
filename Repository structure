@@ -1,0 +1,22 @@
+trippy-tales/
+├── README.md
+├── .gitignore
+├── index.html
+├── package.json
+├── tailwind.config.js
+├── vite.config.js
+├── postcss.config.js
+└── src/
+    ├── main.jsx
+    ├── App.jsx
+    ├── index.css
+    └── components/
+        ├── Navbar.jsx
+        ├── Hero.jsx
+        ├── Destinations.jsx
+        ├── Packages.jsx
+        ├── Gallery.jsx
+        ├── About.jsx
+        ├── Contact.jsx
+        ├── FloatingActions.jsx
+        └── Chatbot.jsx
