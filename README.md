@@ -36,9 +36,6 @@ A modern, responsive travel website built with React, Vite, Tailwind CSS, and Fr
 4. Open your browser and visit `http://localhost:5173`
 
 ## 📞 Contact Information
-
-- **Phone**: 9027070879
-- **WhatsApp**: [Chat with us](https://wa.me/919027070879)
 - **Email**: trippytalesofficial@gmail.com
 - **Instagram**: [@trippytales__official](https://instagram.com/trippytales__official)
 
@@ -59,10 +56,6 @@ A modern, responsive travel website built with React, Vite, Tailwind CSS, and Fr
 - Group Tours
 - Adventure Activities
 - Accommodation Booking
-
-## 📸 Screenshots
-
-*Add screenshots of your website here*
 
 ## 🤝 Contributing
 
