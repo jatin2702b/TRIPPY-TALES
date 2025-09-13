@@ -23,6 +23,7 @@ export function Navbar() {
           <button
             className="md:hidden p-2"
             onClick={() => setIsOpen(!isOpen)}
+            aria-label="Toggle navigation menu"
           >
             ☰
           </button>
@@ -42,3 +43,6 @@ export function Navbar() {
     </nav>
   )
 }
+
+// Provide a default export so default imports work:
+export default Navbar

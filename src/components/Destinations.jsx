@@ -77,3 +77,6 @@ export function Destinations() {
     </section>
   )
 }
+
+// Add this line to provide a default export:
+export default Destinations

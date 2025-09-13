@@ -1,3 +1,4 @@
+// src/components/Chatbot.jsx
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 
@@ -44,7 +45,7 @@ const chatbotResponses = {
 
 const quickReplies = [
   "Show destinations 🏔️",
-  "Tour packages 📦", 
+  "Tour packages 📦",
   "Prices 💰",
   "Book now 📞",
   "Jim Corbett 🐅",
@@ -52,7 +53,7 @@ const quickReplies = [
   "Contact info 📱"
 ]
 
-export function Chatbot() {
+export default function Chatbot() {
   const [isOpen, setIsOpen] = useState(false)
   const [messages, setMessages] = useState([
     {
@@ -65,7 +66,6 @@ export function Chatbot() {
 
   const getResponse = (userMessage) => {
     const message = userMessage.toLowerCase()
-    
     if (message.includes('hello') || message.includes('hi') || message.includes('hey')) {
       return chatbotResponses.greeting[Math.floor(Math.random() * chatbotResponses.greeting.length)]
     }
@@ -90,7 +90,6 @@ export function Chatbot() {
     if (message.includes('price') || message.includes('cost') || message.includes('₹')) {
       return chatbotResponses.price[Math.floor(Math.random() * chatbotResponses.price.length)]
     }
-    
     return chatbotResponses.default[Math.floor(Math.random() * chatbotResponses.default.length)]
   }
 
