@@ -1,5 +1,6 @@
-import { useState } from 'react'
+import { useState, useRef } from 'react'
 import { motion } from 'framer-motion'
+import emailjs from '@emailjs/browser'
 
 const packages = [
   {
@@ -22,15 +23,45 @@ const packages = [
   }
 ]
 
-export function Packages() {
+export default function Packages() {
   const [selectedPackage, setSelectedPackage] = useState(null)
   const [showModal, setShowModal] = useState(false)
   const [paymentType, setPaymentType] = useState('')
+  const [sending, setSending] = useState(false)
+  const [sent, setSent] = useState(false)
+  const [errorMsg, setErrorMsg] = useState('')
+
+  const formRef = useRef(null)
 
   const openBooking = (pkg, type) => {
     setSelectedPackage(pkg)
     setPaymentType(type)
+    setSent(false)
+    setErrorMsg('')
     setShowModal(true)
+  }
+
+  // Submit with EmailJS using form ref; template variables must match input name attributes
+  const handleEmailSubmit = async (e) => {
+    e.preventDefault()
+    setSending(true)
+    setErrorMsg('')
+    try {
+      await emailjs.sendForm(
+        import.meta.env.VITE_EMAILJS_SERVICE_ID,
+        import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
+        formRef.current,
+        { publicKey: import.meta.env.VITE_EMAILJS_PUBLIC_KEY } // optional if you globally init in main.jsx
+      )
+      setSent(true)
+      // Optional: close modal after a short delay
+      // setTimeout(() => setShowModal(false), 1200)
+      // Optional: formRef.current?.reset()
+    } catch (err) {
+      setErrorMsg('Failed to submit. Please try again.')
+    } finally {
+      setSending(false)
+    }
   }
 
   return (
@@ -59,6 +90,8 @@ export function Packages() {
                 src={pkg.image}
                 alt={pkg.name}
                 className="w-full h-48 object-cover"
+                loading="lazy"
+                decoding="async"
               />
               <div className="p-6">
                 <h3 className="text-2xl font-bold mb-2">{pkg.name}</h3>
@@ -91,33 +124,44 @@ export function Packages() {
 
       {/* Booking Modal */}
       {showModal && (
-        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
+        <div
+          className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4"
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="booking-title"
+        >
           <motion.div
             initial={{ scale: 0.9, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
             className="bg-white rounded-lg p-6 w-full max-w-md"
           >
-            <h3 className="text-2xl font-bold mb-4">Booking Details</h3>
-            <form className="space-y-4">
+            <h3 id="booking-title" className="text-2xl font-bold mb-4">Booking Details</h3>
+
+            {/* EmailJS sendForm reads inputs by the "name" attribute that must match your template variables */}
+            <form ref={formRef} onSubmit={handleEmailSubmit} className="space-y-4">
               <input
+                name="user_name"
                 type="text"
                 placeholder="Full Name"
                 className="w-full p-3 border rounded-lg"
                 required
               />
               <input
+                name="user_email"
                 type="email"
                 placeholder="Email"
                 className="w-full p-3 border rounded-lg"
                 required
               />
               <input
+                name="phone"
                 type="tel"
                 placeholder="Phone Number"
                 className="w-full p-3 border rounded-lg"
                 required
               />
               <input
+                name="travelers"
                 type="number"
                 placeholder="Number of Travelers"
                 className="w-full p-3 border rounded-lg"
@@ -125,37 +169,59 @@ export function Packages() {
                 required
               />
               <input
+                name="date"
                 type="date"
                 className="w-full p-3 border rounded-lg"
                 required
               />
               <textarea
+                name="notes"
                 placeholder="Special Requirements"
                 rows="3"
                 className="w-full p-3 border rounded-lg"
               ></textarea>
-              
+
+              {/* Hidden context for template */}
+              <input type="hidden" name="packageId" value={selectedPackage?.id || ''} />
+              <input type="hidden" name="packageName" value={selectedPackage?.name || ''} />
+              <input type="hidden" name="paymentType" value={paymentType} />
+              <input
+                type="hidden"
+                name="amount"
+                value={
+                  paymentType === 'advance'
+                    ? (selectedPackage?.advance ?? '')
+                    : (selectedPackage?.price ?? '')
+                }
+              />
+
               <div className="bg-gray-50 p-4 rounded-lg">
                 <p><strong>Package:</strong> {selectedPackage?.name}</p>
-                <p><strong>Amount:</strong> ₹{paymentType === 'advance' ? selectedPackage?.advance : selectedPackage?.price}</p>
+                <p><strong>Amount:</strong> ₹{paymentType === 'advance' ? selectedPackage?.advance?.toLocaleString() : selectedPackage?.price?.toLocaleString()}</p>
                 <p><strong>Payment Type:</strong> {paymentType === 'advance' ? 'Advance' : 'Full Payment'}</p>
               </div>
-              
-              <div className="flex space-x-4">
-                <button
-                  type="button"
-                  onClick={() => setShowModal(false)}
-                  className="flex-1 btn btn-secondary"
-                >
-                  Cancel
-                </button>
-                <button
-                  type="submit"
-                  className="flex-1 btn btn-primary"
-                >
-                  Proceed to Payment
-                </button>
-              </div>
+
+              {errorMsg && <p className="text-red-600">{errorMsg}</p>}
+              {sent ? (
+                <p className="text-green-600">Thanks! Booking submitted.</p>
+              ) : (
+                <div className="flex space-x-4">
+                  <button
+                    type="button"
+                    onClick={() => setShowModal(false)}
+                    className="flex-1 btn btn-secondary"
+                  >
+                    Cancel
+                  </button>
+                  <button
+                    type="submit"
+                    disabled={sending}
+                    className="flex-1 btn btn-primary"
+                  >
+                    {sending ? 'Sending…' : 'Submit Booking'}
+                  </button>
+                </div>
+              )}
             </form>
           </motion.div>
         </div>

@@ -64,6 +64,7 @@ export function Hero() {
           >
             {slides[currentSlide].title}
           </motion.h1>
+
           <motion.p 
             className="text-xl md:text-2xl mb-8"
             initial={{ y: 20, opacity: 0 }}
@@ -72,12 +73,13 @@ export function Hero() {
           >
             {slides[currentSlide].subtitle}
           </motion.p>
+
           <motion.div
             initial={{ y: 20, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ delay: 1.1, duration: 0.5 }}
           >
-            <button className="btn btn-primary text-lg px-8 py-4">
+            <button className="btn btn-primary text-lg px-8 py-4" aria-label="Book Your Adventure">
               Book Your Adventure
             </button>
           </motion.div>
@@ -87,6 +89,7 @@ export function Hero() {
       <button
         className="absolute left-4 top-1/2 transform -translate-y-1/2 z-20 bg-white/20 hover:bg-white/30 text-white p-3 rounded-full transition-all"
         onClick={prevSlide}
+        aria-label="Previous slide"
       >
         ←
       </button>
@@ -94,9 +97,13 @@ export function Hero() {
       <button
         className="absolute right-4 top-1/2 transform -translate-y-1/2 z-20 bg-white/20 hover:bg-white/30 text-white p-3 rounded-full transition-all"
         onClick={nextSlide}
+        aria-label="Next slide"
       >
         →
       </button>
     </section>
   )
 }
+
+// Provide a default export so default imports work:
+export default Hero

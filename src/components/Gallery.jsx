@@ -55,6 +55,8 @@ export function Gallery() {
                 src={image.src}
                 alt={image.alt}
                 className="w-full h-64 object-cover transition-transform duration-300"
+                loading="lazy"
+                decoding="async"
               />
             </motion.div>
           ))}
@@ -63,3 +65,6 @@ export function Gallery() {
     </section>
   )
 }
+
+// Provide a default export so default imports work
+export default Gallery

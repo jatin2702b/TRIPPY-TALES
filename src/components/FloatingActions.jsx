@@ -22,32 +22,35 @@ export function FloatingActions() {
         href="https://wa.me/919027070879?text=Hi%20Trippy%20Tales!%20I'm%20interested%20in%20your%20tour%20packages.%20Please%20share%20more%20details."
         target="_blank"
         rel="noopener noreferrer"
-        className="bg-green-500 hover:bg-green-600 text-white p-4 rounded-full shadow-lg transition-all group"
+        className="relative bg-green-500 hover:bg-green-600 text-white p-4 rounded-full shadow-lg transition-all group"
         whileHover={{ scale: 1.1 }}
         whileTap={{ scale: 0.9 }}
         title="Chat on WhatsApp"
       >
         <WhatsAppIcon />
         {/* Tooltip */}
-        <div className="absolute right-16 top-1/2 transform -translate-y-1/2 bg-gray-800 text-white px-3 py-1 rounded-lg text-sm opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
+        <div className="pointer-events-none absolute right-16 top-1/2 -translate-y-1/2 bg-gray-800 text-white px-3 py-1 rounded-lg text-sm opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
           Chat on WhatsApp
         </div>
       </motion.a>
-      
+
       {/* Phone Call Button */}
       <motion.a
         href="tel:+919027070879"
-        className="bg-blue-500 hover:bg-blue-600 text-white p-4 rounded-full shadow-lg transition-all group"
+        className="relative bg-blue-500 hover:bg-blue-600 text-white p-4 rounded-full shadow-lg transition-all group"
         whileHover={{ scale: 1.1 }}
         whileTap={{ scale: 0.9 }}
         title="Call Us Now"
       >
         <PhoneIcon />
         {/* Tooltip */}
-        <div className="absolute right-16 top-1/2 transform -translate-y-1/2 bg-gray-800 text-white px-3 py-1 rounded-lg text-sm opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
+        <div className="pointer-events-none absolute right-16 top-1/2 -translate-y-1/2 bg-gray-800 text-white px-3 py-1 rounded-lg text-sm opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
           Call: 9027070879
         </div>
       </motion.a>
     </div>
   )
 }
+
+// Provide a default export so default imports work:
+export default FloatingActions
