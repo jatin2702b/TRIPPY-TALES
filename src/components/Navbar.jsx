@@ -15,6 +15,7 @@ export function Navbar() {
             <a href="#home" className="text-gray-700 hover:text-blue-600">Home</a>
             <a href="#destinations" className="text-gray-700 hover:text-blue-600">Destinations</a>
             <a href="#packages" className="text-gray-700 hover:text-blue-600">Packages</a>
+            <a href="#resorts" className="text-gray-700 hover:text-blue-600">Resorts</a>
             <a href="#gallery" className="text-gray-700 hover:text-blue-600">Gallery</a>
             <a href="#about" className="text-gray-700 hover:text-blue-600">About</a>
             <a href="#contact" className="text-gray-700 hover:text-blue-600">Contact</a>
@@ -34,6 +35,7 @@ export function Navbar() {
             <a href="#home" className="block py-2 text-gray-700">Home</a>
             <a href="#destinations" className="block py-2 text-gray-700">Destinations</a>
             <a href="#packages" className="block py-2 text-gray-700">Packages</a>
+            <a href="#resorts" className="block py-2 text-gray-700">Resorts</a>
             <a href="#gallery" className="block py-2 text-gray-700">Gallery</a>
             <a href="#about" className="block py-2 text-gray-700">About</a>
             <a href="#contact" className="block py-2 text-gray-700">Contact</a>
