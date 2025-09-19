@@ -35,7 +35,7 @@ const ResortCatalog = () => {
       id: 2,
       name: "Trishul Resort",
       location: "Mukteshwar, Uttarakhand",
-      description: "Scenic retreat at Trishul Resort, Mukteshwar with panoramic mountain views, forest trails, bird watching, and adventure activities. 33333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333",
+      description: "Scenic retreat at Trishul Resort, Mukteshwar with panoramic mountain views, forest trails, bird watching, and adventure activities.",
       image: "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/25/9d/ca/27/resorts-by-the-baagh.jpg?w=900&h=500&s=1",
       price: 3200,
       rating: 4.6,
@@ -64,7 +64,7 @@ const ResortCatalog = () => {
       price: 2200,
       rating: 4.5,
       reviews: 78,
-      category: ["camping", "riverside"],
+      category: ["camping", "riverside", "mountain", "lake"],
       amenities: ["River View", "Camping", "Wildlife Safari"],
     },
     {
@@ -76,7 +76,7 @@ const ResortCatalog = () => {
       price: 3800,
       rating: 4.7,
       reviews: 203,
-      category: ["lake", "luxury"],
+      category: ["luxury"],
       amenities: ["Island Visit", "Water Sports", "Lake View"],
     },
     {
@@ -90,6 +90,18 @@ const ResortCatalog = () => {
       reviews: 167,
       category: ["camping", "nature"],
       amenities: ["Bird Watching", "Kayaking", "Nature Trail"],
+    },
+    {
+      id: 7,
+      name: "Shivpuri Camps",
+      location: "Rishikesh, Uttarakhand",
+      description: "Riverside camps and adventure activities near Rishikesh, popular for rafting and nature stays.",
+      image: "https://imgs.search.brave.com/MsXaA-r2xefyJY2muGudW6W6ujCQRSO8YlW6r-6YZ0s/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9yaXNo/aWtlc2guY2FtcC93/cC1jb250ZW50L3Vw/bG9hZHMvMjAyNC8x/MC9TaGl2cHVyaS1C/ZWFjaC1SaXZlcnNp/ZGUtQ2FtcGluZy1p/bi1SaXNoaWtlc2gu/anBn",
+      price: 3000,
+      rating: 4.6,
+      reviews: 142,
+      category: ["adventure", "riverside", "spiritual"],
+      amenities: ["River Rafting", "Campfire", "Nature Walk"],
     },
   ]);
 
@@ -108,7 +120,7 @@ const ResortCatalog = () => {
     { value: 'camping', label: 'Camping', icon: 'fas fa-campground' }
   ];
 
-  // Filter and search logic
+  // Filter and search logic (unchanged)
   const filteredResorts = useMemo(() => {
     return resorts.filter(resort => {
       const matchesCategory = currentFilter === 'all' || resort.category.includes(currentFilter);
@@ -209,31 +221,13 @@ const ResortCatalog = () => {
                 whileHover={{ y: -2, boxShadow: "0 10px 25px rgba(0,0,0,0.1)" }}
                 whileTap={{ scale: 0.98 }}
               >
-                {/* Keeping filter icon classes as-is; ensure FA CSS is loaded if you want these visible */}
                 <i className={filter.icon}></i>
                 {filter.label}
               </motion.button>
             ))}
           </div>
 
-          {/* Search Bar */}
-          <motion.div
-            className="max-w-md mx-auto relative"
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ delay: 0.2 }}
-          >
-            <input
-              type="text"
-              placeholder="Search resorts by name or location..."
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-              className="w-full px-6 py-4 pl-14 rounded-full border-2 border-gray-200 focus:border-blue-500 focus:outline-none focus:ring-4 focus:ring-blue-100 text-lg"
-            />
-            <div className="absolute left-5 top-1/2 transform -translate-y-1/2 text-gray-400">
-              <FontAwesomeIcon icon={faMagnifyingGlass} />
-            </div>
-          </motion.div>
+          {/* Search Bar removed */}
         </motion.div>
 
         {/* Resort Grid */}
@@ -262,7 +256,6 @@ const ResortCatalog = () => {
                     transition={{ duration: 0.4 }}
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent">
-                    {/* Removed price badge */}
                     <div className="absolute top-4 right-4 flex gap-2">
                       <motion.button
                         className="w-12 h-12 bg-white/90 backdrop-blur-sm rounded-full flex items-center justify-center hover:bg-white transition-colors"
@@ -328,7 +321,7 @@ const ResortCatalog = () => {
                     ))}
                   </div>
 
-                  {/* Footer: removed price; show WhatsApp Get Details */}
+                  {/* Footer */}
                   <div className="flex justify-end items-center pt-4 border-t border-gray-100">
                     <motion.button
                       className="bg-green-600 text-white px-6 py-3 rounded-full font-semibold hover:shadow-lg transition-all duration-300 inline-flex items-center gap-2"

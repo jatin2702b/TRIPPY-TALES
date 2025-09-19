@@ -6,6 +6,10 @@ import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import Destinations from './components/Destinations';
 import Packages from './components/Packages';
+
+// New trekking slider section
+import Trekking from './components/Trekking';
+
 import ResortCatalog from './components/ResortCatalog';
 import Gallery from './components/Gallery';
 import About from './components/About';
@@ -20,6 +24,10 @@ export default function App() {
       <Hero />
       <Destinations />
       <Packages />
+
+      {/* Trekking slider placed before ResortCatalog */}
+      <Trekking />
+
       <ResortCatalog />
       <Gallery />
       <About />
