@@ -1,31 +1,12 @@
 import { motion } from 'framer-motion'
 
 const galleryImages = [
-  {
-    src: 'https://images.unsplash.com/photo-1516426122078-c23e76319801?ixlib=rb-4.0.3&w=400',
-    alt: 'Jim Corbett Tiger'
-  },
-  {
-    src: 'https://i.pinimg.com/1200x/f8/7c/da/f87cda1bb71c2e344d529473a6551c84.jpg',
-    alt: 'Nainital Lake'
-  },
-  {
-    src: 'https://i.pinimg.com/736x/db/db/5e/dbdb5ec46f0367cf04d395c033aac29d.jpg',
-    alt: 'Mountain View'
-  },
-  {
-    src: 'https://i.pinimg.com/1200x/5b/54/fd/5b54fdad18dc4b1089baa9cfbb815dfc.jpg',
-    alt: 'Wildlife Safari'
-  },
-  {
-    src: 'https://i.pinimg.com/736x/83/b7/ff/83b7ff763a40f8722174fc28d8ca98bf.jpg',
-    alt: 'Temple View'
-  },
-  {
-    src: 'https://imgs.search.brave.com/LW08HIiXnkMuVdse9GtL1t8yHinaqkfSPnP_z9EqwJM/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9tZWRp/YS1jZG4udHJpcGFk/dmlzb3IuY29tL21l/ZGlhL3Bob3RvLW8v/MDkvYTMvODIvYjQv/Y29yYmV0dC1mYWxs/cy5qcGc',
-    alt: 'Waterfall'
-  }
-]
+  { src: 'https://images.unsplash.com/photo-1516426122078-c23e76319801?ixlib=rb-4.0.3&w=1600&auto=format&fit=crop&q=80', alt: 'Jim Corbett Tiger' },
+  { src: 'https://i.pinimg.com/1200x/f8/7c/da/f87cda1bb71c2e344d529473a6551c84.jpg', alt: 'Nainital Lake' },
+  { src: 'https://i.pinimg.com/736x/db/db/5e/dbdb5ec46f0367cf04d395c033aac29d.jpg', alt: 'Mountain View' },
+  { src: 'https://i.pinimg.com/1200x/5b/54/fd/5b54fdad18dc4b1089baa9cfbb815dfc.jpg', alt: 'Wildlife Safari' },
+  { src: 'https://i.pinimg.com/736x/83/b7/ff/83b7ff763a40f8722174fc28d8ca98bf.jpg', alt: 'Temple View' },
+  { src: 'https://i.pinimg.com/1200x/3c/6d/00/3c6d00696ee4ffb7cf5df979d82bc486.jpg', alt: 'Corbett Waterfall' }, ]
 
 export function Gallery() {
   return (
@@ -35,29 +16,49 @@ export function Gallery() {
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-center mb-16"
+          className="text-center mb-8"
         >
-          <h2 className="text-4xl font-bold text-gray-900 mb-4">Photo Gallery</h2>
+          <h2 className="text-4xl font-bold text-gray-900">Photo Gallery</h2>
+          <p className="text-gray-600 mt-2">Swipe to explore</p>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        {/* Horizontal slider with scroll snap */}
+        <div
+          style={{
+            WebkitOverflowScrolling: 'touch',
+            touchAction: 'manipulation'
+          }}
+          className="
+            relative
+            flex gap-4 overflow-x-auto overflow-y-hidden pb-2
+            snap-x snap-proximity scroll-smooth
+            overscroll-x-contain overscroll-y-auto
+            [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden
+          "
+        >
           {galleryImages.map((image, index) => (
             <motion.div
               key={index}
-              initial={{ opacity: 0, scale: 0.8 }}
+              initial={{ opacity: 0, scale: 0.9 }}
               whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              transition={{ delay: index * 0.1 }}
-              whileHover={{ scale: 1.05 }}
-              className="relative overflow-hidden rounded-lg shadow-lg cursor-pointer"
+              viewport={{ once: true, margin: '-10% 0px -10% 0px' }}
+              transition={{ duration: 0.4, delay: index * 0.05 }}
+              whileHover={{ scale: 1.02 }}
+              className="
+                snap-center snap-always
+                shrink-0 w-72 md:w-96
+                relative overflow-hidden rounded-lg shadow-sm hover:shadow-md transition-shadow
+                bg-gray-100
+              "
             >
               <img
                 src={image.src}
                 alt={image.alt}
-                className="w-full h-64 object-cover transition-transform duration-300"
+                className="w-full h-56 md:h-64 object-cover"
                 loading="lazy"
                 decoding="async"
               />
+              <div className="absolute inset-0 pointer-events-none bg-gradient-to-t from-black/20 via-transparent to-transparent" />
             </motion.div>
           ))}
         </div>
@@ -66,5 +67,4 @@ export function Gallery() {
   )
 }
 
-// Provide a default export so default imports work
 export default Gallery
