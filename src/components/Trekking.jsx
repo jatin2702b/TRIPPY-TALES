@@ -84,6 +84,20 @@ const treks = [
     images: ['https://i.pinimg.com/1200x/5c/da/2b/5cda2b99127c7afa6e1e2b6b08efd217.jpg'],
     notes: 'Approx 16 km to ~3,583 m; best May–Jun & Sep–Oct; start early for weather and crowd',
   },
+
+  // New: Pindari Glacier
+  {
+    id: 'pindari-glacier',
+    title: 'Pindari Glacier Trek',
+    area: '(Kumaon, via Khati/Dhakuri)',
+    duration: '6–8 days',
+    level: 'Easy to moderate (long distances)',
+    stay: 'GMVN/ KMVN rest houses & homestays en route',
+    guides: 'Local guides and porters available from Loharkhet/Khati',
+    bestFor: 'Classic Kumaon glacier trail with villages, meadows, and big-mountain views',
+    images: ['https://imgs.search.brave.com/NJSDOmbsEaItQPVxIVt5DhXDZFlSPJhbuzKlwZhcxQY/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly93d3cu/dGVhbS1iaHAuY29t/L2ZvcnVtL2F0dGFj/aG1lbnRzL3RyYXZl/bG9ndWVzLzIwODIx/NjZkMTY4NzQ1NjUw/N3QtdHJlay1waW5k/YXJpLWdsYWNpZXIt/MjAyMDExMThfMjAy/MzU0LmpwZw'],
+    notes: 'Typical route: Loharkhet → Dhakuri → Khati → Dwali → Phurkia → Pindari (Zero Point) and back',
+  },
 ];
 
 export default function Trekking() {
