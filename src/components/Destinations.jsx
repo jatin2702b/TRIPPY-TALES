@@ -1,57 +1,120 @@
-import { useRef } from 'react'
+import { useRef, useEffect } from 'react'
 import { motion } from 'framer-motion'
 
 const destinations = [
   {
-    name: 'Dhikuli',
-    image: 'https://media-cdn.tripadvisor.com/media/photo-s/2b/be/d5/d6/caption.jpg',
-    description: 'Gateway to Jim Corbett with luxury resorts and wildlife experiences'
-  },
+    name: 'Mussoorie–Landour',
+    image: 'https://i.pinimg.com/736x/53/72/0d/53720de90e51c15111ff6a0d3f0e3ebf.jpg',
+    description: 'Colonial-era charm, Lal Tibba views, and quiet cafes above Mussoorie'
+  }, // Landour is a tranquil cantonment just above Mussoorie
+
   {
-    name: 'Ramnagar',
-    image: 'https://www.corbettnationalpark.in/blog/wp-content/uploads/2021/02/kosi-river1.jpg',
-    description: 'Main entrance to Jim Corbett National Park'
-  },
+    name: 'Chopta',
+    image: 'https://i.pinimg.com/1200x/91/00/55/91005566754f88e197ebad7ca2115028.jpg',
+    description: 'Mini Switzerland base for Tungnath–Chandrashila with grand Himalayan views'
+  }, // Base for Tungnath–Chandrashila
+
   {
-    name: 'Jhirna Range',
-    image: 'https://www.tusktravel.com/blog/wp-content/uploads/2021/03/Jim-Corbett-National-Park.jpg',
-    description: 'Open year-round for wildlife safaris and bird watching'
-  },
+    name: 'Valley of Flowers',
+    image: 'https://i.pinimg.com/736x/b2/db/1c/b2db1c2902681c1cc99f4d6edb79d3a1.jpg',
+    description: 'UNESCO alpine meadows blooming July–Sept with rare Himalayan flowers'
+  }, // UNESCO-listed alpine meadows
+
   {
-    name: 'Corbett Falls',
-    image: 'https://www.tejomayaresorts.com/wp-content/uploads/2024/01/Corbett-waterfall-jim-corbett.jpg',
-    description: 'Beautiful waterfall surrounded by dense forest'
-  },
+    name: 'Naina Peak',
+    image: 'https://i.pinimg.com/736x/b9/0c/20/b90c20a5f698901e42b8e5428f9bad40.jpg',
+    description: 'Highest point of Nainital with panoramic lake and Himalayan views'
+  }, // Highest point around Nainital
+
   {
-    name: 'Nainital',
-    image: 'https://i.pinimg.com/736x/8e/c7/f3/8ec7f3401d3999a071cdaa85a19ce606.jpg',
-    description: 'Queen of Hills with beautiful Naini Lake'
-  },
+    name: 'Rishikesh',
+    image: 'https://i.pinimg.com/736x/7f/cf/e4/7fcfe474f29fbcc76cd1895f966b5a59.jpg',
+    description: 'Yoga capital with Ganga Aarti, rafting, camping, and ashram stays'
+  }, // Yoga, Ganga Aarti, rafting
+
   {
-    name: 'Bhimtal',
-    image: 'https://imgs.search.brave.com/Dzdt36hFU-WAX43uj-1lZIGnXyvspO1MwgbGtU_fPAU/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9tZWRp/YS1jZG4udHJpcGFk/dmlzb3IuY29tL21l/ZGlhL3Bob3RvLW8v/MmMvMGUvYzYvNTkv/aXNsYW5kLWluLWJo/aW10YWwtbGFrZS5q/cGc',
-    description: 'Serene lake town perfect for peaceful getaways'
-  }
+    name: 'Jageshwar Dham, Almora',
+    image: 'https://i.pinimg.com/1200x/87/4b/ec/874bec0fe75f308a014c0ac1fa2b6084.jpg',
+    description: 'Kumaon’s cultural heart on a ridge with heritage, crafts, and views'
+  }, // Historic ridge town in Kumaon
+
+  { 
+    name: 'Dhikuli', 
+    image: 'https://media-cdn.tripadvisor.com/media/photo-s/2b/be/d5/d6/caption.jpg', 
+    description: 'Gateway to Jim Corbett with luxury resorts and wildlife experiences' 
+  },
+  { 
+    name: 'Ramnagar', 
+    image: 'https://www.corbettnationalpark.in/blog/wp-content/uploads/2021/02/kosi-river1.jpg', 
+    description: 'Main Entrance Passage to the Renowned Jim Corbett National Park' 
+  },
+  { 
+    name: 'Jhirna Range', 
+    image: 'https://www.tusktravel.com/blog/wp-content/uploads/2021/03/Jim-Corbett-National-Park.jpg', 
+    description: 'Open year-round for wildlife safaris and bird watching' 
+  },
+  { 
+    name: 'Corbett Falls', 
+    image: 'https://www.tejomayaresorts.com/wp-content/uploads/2024/01/Corbett-waterfall-jim-corbett.jpg', 
+    description: 'Beautiful waterfall surrounded by dense forest' 
+  },
+  { 
+    name: 'Nainital', 
+    image: 'https://i.pinimg.com/736x/8e/c7/f3/8ec7f3401d3999a071cdaa85a19ce606.jpg', 
+    description: 'Queen of Hills with the Beautiful and Picturesque Naini Lake' 
+  },
+  { 
+    name: 'Bhimtal', 
+    image: 'https://i.pinimg.com/736x/c9/e4/4c/c9e44c5c2bc8927f365cf1c8a10f57dd.jpg', 
+    description: 'Serene lake town perfect for peaceful getaways' 
+  },
 ]
 
 export function Destinations() {
   const trackRef = useRef(null)
 
-  const scrollByCards = (dir) => {
+  // drag-to-scroll for desktop + touch
+  useEffect(() => {
     const el = trackRef.current
     if (!el) return
-    const card = el.querySelector('.destination-card')
-    const cardWidth = card ? card.clientWidth : 320
-    const gap = 24 // gap-6
-    const visible = window.innerWidth < 768 ? 1 : window.innerWidth < 1024 ? 2 : 3
-    const amount = (cardWidth + gap) * visible
-    el.scrollBy({ left: dir * amount, behavior: 'smooth' })
-  }
+    let isDown = false, startX = 0, scrollLeft = 0
+
+    const onDown = (e) => {
+      isDown = true
+      el.classList.add('cursor-grabbing')
+      startX = (e.pageX || e.touches?.[0]?.pageX) - el.offsetLeft
+      scrollLeft = el.scrollLeft
+    }
+    const onLeaveUp = () => { isDown = false; el.classList.remove('cursor-grabbing') }
+    const onMove = (e) => {
+      if (!isDown) return
+      e.preventDefault()
+      const x = (e.pageX || e.touches?.[0]?.pageX) - el.offsetLeft
+      const walk = (x - startX) * 1.2
+      el.scrollLeft = scrollLeft - walk
+    }
+
+    el.addEventListener('mousedown', onDown)
+    el.addEventListener('mouseleave', onLeaveUp)
+    el.addEventListener('mouseup', onLeaveUp)
+    el.addEventListener('mousemove', onMove)
+    el.addEventListener('touchstart', onDown, { passive: true })
+    el.addEventListener('touchend', onLeaveUp)
+    el.addEventListener('touchmove', onMove, { passive: false })
+    return () => {
+      el.removeEventListener('mousedown', onDown)
+      el.removeEventListener('mouseleave', onLeaveUp)
+      el.removeEventListener('mouseup', onLeaveUp)
+      el.removeEventListener('mousemove', onMove)
+      el.removeEventListener('touchstart', onDown)
+      el.removeEventListener('touchend', onLeaveUp)
+      el.removeEventListener('touchmove', onMove)
+    }
+  }, [])
 
   return (
     <section id="destinations" className="py-20 bg-gray-50">
       <div className="max-w-7xl mx-auto px-4">
-        {/* Centered title */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -60,79 +123,51 @@ export function Destinations() {
           className="text-center mb-8"
         >
           <h2 className="text-4xl font-bold text-gray-900">Our Destinations</h2>
+          <p className="mt-2 text-gray-600">Scroll to explore</p>
         </motion.div>
 
         <div className="relative">
-          {/* Left/Right overlay arrows like Netflix */}
-          <button
-            onClick={() => scrollByCards(-1)}
-            aria-label="Previous"
-            className="
-              absolute left-2 top-1/2 -translate-y-1/2 z-10
-              h-10 w-10 md:h-12 md:w-12 rounded-full
-              bg-white/90 shadow border border-gray-200
-              text-gray-800 hover:bg-white
-            "
-          >
-            ‹
-          </button>
-          <button
-            onClick={() => scrollByCards(1)}
-            aria-label="Next"
-            className="
-              absolute right-2 top-1/2 -translate-y-1/2 z-10
-              h-10 w-10 md:h-12 md:w-12 rounded-full
-              bg-white/90 shadow border border-gray-200
-              text-gray-800 hover:bg-white
-            "
-          >
-            ›
-          </button>
-
-          {/* Optional edge fades */}
-          <div className="pointer-events-none absolute inset-y-0 left-0 w-10 bg-gradient-to-r from-gray-50 to-transparent" />
-          <div className="pointer-events-none absolute inset-y-0 right-0 w-10 bg-gradient-to-l from-gray-50 to-transparent" />
-
-          {/* Slider track with scroll snap */}
+          {/* Slider track (no arrows) */}
           <div
             ref={trackRef}
             className="
-              flex gap-6 overflow-x-auto pb-2 scroll-smooth
+              group flex gap-6 overflow-x-auto pb-2 scroll-smooth
               snap-x snap-mandatory
               overscroll-x-contain
               [-ms-overflow-style:none] [scrollbar-width:none]
               [&::-webkit-scrollbar]:hidden
+              select-none cursor-grab
             "
           >
             {destinations.map((destination, index) => (
               <motion.div
                 key={destination.name + index}
-                initial={{ y: 50, opacity: 0 }}
+                initial={{ y: 40, opacity: 0 }}
                 whileInView={{ y: 0, opacity: 1 }}
-                viewport={{ once: true }}
+                viewport={{ once: true, margin: '-10% 0px -10% 0px' }}
                 transition={{ delay: index * 0.05, duration: 0.5 }}
-                whileHover={{ y: -6 }}
-                className="
-                  destination-card snap-start shrink-0
-                  w-72 md:w-80 bg-white rounded-xl overflow-hidden shadow
-                  hover:shadow-lg transition-shadow
-                "
+                className="destination-card snap-start shrink-0 w-72 md:w-80"
               >
-                <div className="relative overflow-hidden">
-                  <img
-                    src={destination.image}
-                    alt={destination.name}
-                    className="w-full h-56 object-cover transition-transform duration-300 hover:scale-105"
-                    loading="lazy"
-                    decoding="async"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
-                </div>
-                <div className="p-5">
-                  <h3 className="text-lg font-semibold mb-1">{destination.name}</h3>
-                  <p className="text-gray-600 text-sm leading-relaxed">
-                    {destination.description}
-                  </p>
+                <div className="relative bg-white rounded-xl overflow-hidden shadow hover:shadow-lg transition-shadow border border-gray-100">
+                  {/* Uniform image sizing */}
+                  <div className="w-full aspect-[4/3] overflow-hidden">
+                    <img
+                      src={destination.image}
+                      alt={destination.name}
+                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+                      loading="lazy"
+                      decoding="async"
+                    />
+                  </div>
+
+                  <div className="p-5">
+                    <h3 className="text-lg font-semibold mb-1 text-gray-900">
+                      {destination.name}
+                    </h3>
+                    <p className="text-gray-600 text-sm leading-relaxed">
+                      {destination.description}
+                    </p>
+                  </div>
                 </div>
               </motion.div>
             ))}
@@ -143,5 +178,4 @@ export function Destinations() {
   )
 }
 
-// Default export
 export default Destinations

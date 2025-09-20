@@ -1,5 +1,5 @@
 // src/components/Trekking.jsx
-import React, { useRef } from 'react';
+import React, { useRef, useEffect } from 'react';
 import { motion } from 'framer-motion';
 
 const treks = [
@@ -13,12 +13,12 @@ const treks = [
     guides: 'Local guides in Pantwari (base) easily available',
     bestFor: 'Weekend trip, families, first trek experience',
     images: [
-       'https://i.pinimg.com/1200x/99/88/81/99888102c4ceb6eb562ba1005f33f965.jpg',
+      'https://i.pinimg.com/1200x/99/88/81/99888102c4ceb6eb562ba1005f33f965.jpg',
     ],
   },
   {
-    id: 'deoriatal-tungnath-short',
-    title: 'Deoriatal – Tungnath (short)',
+    id: 'deoriatal-tungnath',
+    title: 'Deoriatal – Tungnath',
     area: '(near Chopta)',
     duration: '1–2 days',
     level: 'Easy walk, gentle climbs',
@@ -31,8 +31,8 @@ const treks = [
   },
   {
     id: 'chopta-tungnath-chandrashila',
-    title: 'Chopta – Tungnath – Chandrashila (mini)',
-    area: '(Chopta region)',
+    title: 'Chopta, Tungnath-Chandrashila',
+    area: '(Chopta)',
     duration: '1 full day',
     level: 'Easy to moderate (fitness dependent)',
     stay: 'Homestays in Chopta (no camping needed)',
@@ -42,21 +42,117 @@ const treks = [
       'https://i.pinimg.com/1200x/8d/4d/15/8d4d153523f5cda4c2c79456268806d0.jpg',
     ],
   },
+
+  // New: Naina Peak (Nainital)
+  {
+    id: 'naina-peak',
+    title: 'Naina Peak Trek',
+    area: '(Nainital)',
+    duration: '1 day',
+    level: 'Easy, beginner-friendly',
+    stay: 'Hotels/homestays in Nainital (day hike)',
+    guides: 'Optional; well-marked forest trail',
+    bestFor: 'Highest point in Nainital, panoramic lake & Himalayan views',
+    images: [
+      // Replace if preferred
+      'https://i.pinimg.com/736x/41/b0/53/41b053a8e248e9f022ef1619472fb43f.jpg',
+    ],
+    notes: 'Approx 6 km climb to ~2,615 m; also called China/Cheena Peak',
+  },
+
+  // New: Valley of Flowers (Joshimath/Govindghat)
+  {
+    id: 'valley-of-flowers',
+    title: 'Valley of Flowers + Hemkund (optional)',
+    area: '(Govindghat–Ghangaria)',
+    duration: '4–6 days (trekking 3–4 days)',
+    level: 'Moderate (Hemkund day is steep)',
+    stay: 'Lodges in Ghangaria',
+    guides: 'Available at Govindghat/Ghangaria',
+    bestFor: 'Alpine meadows, 600+ flower species, sacred Hemkund lake',
+    images: [
+      // Replace if preferred
+      'https://i.pinimg.com/736x/81/85/50/818550200b38ff8b8268e8cc2bad74b8.jpg',
+    ],
+    notes: 'Start at Govindghat → Ghangaria; best July–Sept; Hemkund ~4,300 m climb day',
+  },
+
+  // New: Rudranath (Panch Kedar)
+  {
+    id: 'rudranath',
+    title: 'Rudranath Trek (Panch Kedar)',
+    area: '(Chamoli, via Sagar / Panar Bugyal)',
+    duration: '3–5 days (on foot)',
+    level: 'Moderate to tough',
+    stay: 'Camps/Basic lodges en route (Panar Bugyal, etc.)',
+    guides: 'Local guides from Sagar/Gopeshwar available',
+    bestFor: 'Meadows, ridge walks, sacred Rudranath temple',
+    images: [
+      // Replace if preferred
+      'https://i.pinimg.com/1200x/39/c2/ae/39c2aeed1e41aa29437aa196159d912a.jpg',
+    ],
+    notes: 'Popular via Sagar → Panar Bugyal → Rudranath; long walking days at altitude',
+  },
+
+  // New: Kedarnath (Yatra)
+  {
+    id: 'kedarnath',
+    title: 'Kedarnath Trek (Yatra)',
+    area: '(Gaurikund-Kedarnath)',
+    duration: '1–2 days (one-way 6–8 hrs)',
+    level: 'Moderate (continuous ascent)',
+    stay: 'Lodges/tents at Kedarnath or base camps',
+    guides: 'Available at Gaurikund; ponies/palkis/porters/heli options',
+    bestFor: 'Spiritual pilgrimage with high-altitude Himalayan views',
+    images: [
+      // Replace if preferred
+      'https://i.pinimg.com/1200x/5c/da/2b/5cda2b99127c7afa6e1e2b6b08efd217.jpg',
+    ],
+    notes: 'Approx 16 km to ~3,583 m; best May–Jun & Sep–Oct; start early for weather and crowd',
+  },
 ];
 
 export default function Trekking() {
   const trackRef = useRef(null);
 
-  const scrollByCards = (dir) => {
+  // drag-to-scroll (desktop) + touch support
+  useEffect(() => {
     const el = trackRef.current;
     if (!el) return;
-    const card = el.querySelector('.trek-card');
-    const cardWidth = card ? card.clientWidth : 320;
-    const gap = 24; // matches gap-6
-    const visible = window.innerWidth < 768 ? 1 : window.innerWidth < 1024 ? 2 : 3;
-    const amount = (cardWidth + gap) * visible;
-    el.scrollBy({ left: dir * amount, behavior: 'smooth' });
-  };
+    let isDown = false, startX = 0, scrollLeft = 0;
+
+    const onDown = (e) => {
+      isDown = true;
+      el.classList.add('cursor-grabbing');
+      startX = (e.pageX || e.touches?.[0]?.pageX) - el.offsetLeft;
+      scrollLeft = el.scrollLeft;
+    };
+    const onLeaveUp = () => { isDown = false; el.classList.remove('cursor-grabbing'); };
+    const onMove = (e) => {
+      if (!isDown) return;
+      e.preventDefault();
+      const x = (e.pageX || e.touches?.[0]?.pageX) - el.offsetLeft;
+      const walk = (x - startX) * 1.2;
+      el.scrollLeft = scrollLeft - walk;
+    };
+
+    el.addEventListener('mousedown', onDown);
+    el.addEventListener('mouseleave', onLeaveUp);
+    el.addEventListener('mouseup', onLeaveUp);
+    el.addEventListener('mousemove', onMove);
+    el.addEventListener('touchstart', onDown, { passive: true });
+    el.addEventListener('touchend', onLeaveUp);
+    el.addEventListener('touchmove', onMove, { passive: false });
+    return () => {
+      el.removeEventListener('mousedown', onDown);
+      el.removeEventListener('mouseleave', onLeaveUp);
+      el.removeEventListener('mouseup', onLeaveUp);
+      el.removeEventListener('mousemove', onMove);
+      el.removeEventListener('touchstart', onDown);
+      el.removeEventListener('touchend', onLeaveUp);
+      el.removeEventListener('touchmove', onMove);
+    };
+  }, []);
 
   return (
     <section id="trekking" className="py-20 bg-white">
@@ -76,27 +172,7 @@ export default function Trekking() {
         </motion.div>
 
         <div className="relative">
-          {/* Overlay arrows */}
-          <button
-            onClick={() => scrollByCards(-1)}
-            aria-label="Previous treks"
-            className="absolute left-2 top-1/2 -translate-y-1/2 z-10 h-10 w-10 md:h-12 md:w-12 rounded-full bg-white/90 shadow border border-gray-200 text-gray-800 hover:bg-white"
-          >
-            ‹
-          </button>
-          <button
-            onClick={() => scrollByCards(1)}
-            aria-label="Next treks"
-            className="absolute right-2 top-1/2 -translate-y-1/2 z-10 h-10 w-10 md:h-12 md:w-12 rounded-full bg-white/90 shadow border border-gray-200 text-gray-800 hover:bg-white"
-          >
-            ›
-          </button>
-
-          {/* Edge fades */}
-          <div className="pointer-events-none absolute inset-y-0 left-0 w-10 bg-gradient-to-r from-white to-transparent" />
-          <div className="pointer-events-none absolute inset-y-0 right-0 w-10 bg-gradient-to-l from-white to-transparent" />
-
-          {/* Slider track */}
+          {/* Slider track (no arrows, no side fades) */}
           <div
             ref={trackRef}
             className="
@@ -104,6 +180,7 @@ export default function Trekking() {
               snap-x snap-mandatory overscroll-x-contain
               [-ms-overflow-style:none] [scrollbar-width:none]
               [&::-webkit-scrollbar]:hidden
+              select-none cursor-grab
             "
           >
             {treks.map((t, idx) => (
@@ -119,7 +196,7 @@ export default function Trekking() {
                   bg-white rounded-2xl overflow-hidden shadow hover:shadow-lg transition-shadow
                 "
               >
-                <div className="relative h-56 bg-gray-100">
+                <div className="relative w-full aspect-[4/3] bg-gray-100 overflow-hidden">
                   {t.images && t.images.length > 0 ? (
                     <img
                       src={t.images[0]}
@@ -147,9 +224,9 @@ export default function Trekking() {
                     <li><span className="font-medium">Stay:</span> {t.stay}</li>
                     <li><span className="font-medium">Guides:</span> {t.guides}</li>
                     <li><span className="font-medium">Best for:</span> {t.bestFor}</li>
+                    {t.notes && <li className="text-gray-600">{t.notes}</li>}
                   </ul>
 
-                  {/* Optional secondary images preview row */}
                   {t.images && t.images.length > 1 && (
                     <div className="mt-4 flex gap-2 overflow-x-auto">
                       {t.images.slice(1).map((img, i) => (
