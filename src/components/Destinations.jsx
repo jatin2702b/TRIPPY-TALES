@@ -16,7 +16,7 @@ const destinations = [
   { name: 'Bhimtal', image: 'https://i.pinimg.com/736x/c9/e4/4c/c9e44c5c2bc8927f365cf1c8a10f57dd.jpg', description: 'Serene lake town perfect for peaceful getaways' },
 ]
 
-export function Destinations() {
+function Destinations() {
   const trackRef = useRef(null)
 
   return (
@@ -34,40 +34,39 @@ export function Destinations() {
         </motion.div>
 
         <div className="relative">
-          {/* Native momentum + snap, no JS drag */}
           <div
             ref={trackRef}
-            style={{ WebkitOverflowScrolling: 'touch' }} /* iOS momentum */ /* [web:58] */
+            style={{ WebkitOverflowScrolling: 'touch' }}
             className="
               group flex gap-6 overflow-x-auto pb-2
               snap-x snap-proximity scroll-smooth overscroll-x-contain
+              overscroll-auto
               [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden
               select-none touch-pan-x
-              will-change-scroll
             "
           >
-            {destinations.map((destination, index) => (
+            {destinations.map((d, i) => (
               <motion.div
-                key={destination.name + index}
+                key={d.name + i}
                 initial={{ y: 40, opacity: 0 }}
                 whileInView={{ y: 0, opacity: 1 }}
                 viewport={{ once: true, margin: '-10% 0px -10% 0px' }}
-                transition={{ delay: index * 0.05, duration: 0.5 }}
+                transition={{ delay: i * 0.05, duration: 0.5 }}
                 className="destination-card snap-start shrink-0 w-72 md:w-80"
               >
                 <div className="relative bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow border border-gray-100">
                   <div className="w-full aspect-[4/3] overflow-hidden">
                     <img
-                      src={destination.image}
-                      alt={destination.name}
+                      src={d.image}
+                      alt={d.name}
                       className="w-full h-full object-cover"
                       loading="lazy"
                       decoding="async"
                     />
                   </div>
                   <div className="p-5">
-                    <h3 className="text-lg font-semibold mb-1 text-gray-900">{destination.name}</h3>
-                    <p className="text-gray-600 text-sm leading-relaxed">{destination.description}</p>
+                    <h3 className="text-lg font-semibold mb-1 text-gray-900">{d.name}</h3>
+                    <p className="text-gray-600 text-sm leading-relaxed">{d.description}</p>
                   </div>
                 </div>
               </motion.div>
