@@ -1,5 +1,5 @@
 // src/components/Trekking.jsx
-import React, { useRef, useEffect } from 'react';
+import React, { useRef } from 'react';
 import { motion } from 'framer-motion';
 
 const treks = [
@@ -12,9 +12,7 @@ const treks = [
     stay: 'Camping under the stars',
     guides: 'Local guides in Pantwari (base) easily available',
     bestFor: 'Weekend trip, families, first trek experience',
-    images: [
-      'https://i.pinimg.com/1200x/99/88/81/99888102c4ceb6eb562ba1005f33f965.jpg',
-    ],
+    images: ['https://i.pinimg.com/1200x/99/88/81/99888102c4ceb6eb562ba1005f33f965.jpg'],
   },
   {
     id: 'deoriatal-tungnath',
@@ -25,9 +23,7 @@ const treks = [
     stay: 'Camping near the lake or homestays in Chopta',
     guides: 'Locals in Chopta provide guide, mule support if needed',
     bestFor: 'Beautiful lake view, option to visit Tungnath temple',
-    images: [
-      'https://i.pinimg.com/1200x/de/2d/bf/de2dbf5cab2167d1443f6c596bdf3022.jpg',
-    ],
+    images: ['https://i.pinimg.com/1200x/de/2d/bf/de2dbf5cab2167d1443f6c596bdf3022.jpg'],
   },
   {
     id: 'chopta-tungnath-chandrashila',
@@ -38,12 +34,8 @@ const treks = [
     stay: 'Homestays in Chopta (no camping needed)',
     guides: 'Every homestay in Chopta can arrange a local guide',
     bestFor: 'Short trek, spiritual visit, Himalayan sunrise',
-    images: [
-      'https://i.pinimg.com/1200x/8d/4d/15/8d4d153523f5cda4c2c79456268806d0.jpg',
-    ],
+    images: ['https://i.pinimg.com/1200x/8d/4d/15/8d4d153523f5cda4c2c79456268806d0.jpg'],
   },
-
-  // New: Naina Peak (Nainital)
   {
     id: 'naina-peak',
     title: 'Naina Peak Trek',
@@ -53,29 +45,21 @@ const treks = [
     stay: 'Hotels/homestays in Nainital (day hike)',
     guides: 'Optional; well-marked forest trail',
     bestFor: 'Highest point in Nainital, panoramic lake & Himalayan views',
-    images: [
-      'https://i.pinimg.com/736x/41/b0/53/41b053a8e248e9f022ef1619472fb43f.jpg',
-    ],
+    images: ['https://i.pinimg.com/736x/41/b0/53/41b053a8e248e9f022ef1619472fb43f.jpg'],
     notes: 'Approx 6 km climb to ~2,615 m; also called China/Cheena Peak',
   },
-
-  // New: Valley of Flowers (Joshimath/Govindghat)
   {
     id: 'valley-of-flowers',
     title: 'Valley of Flowers + Hemkund (optional)',
     area: '(Govindghat–Ghangaria)',
     duration: '4–6 days (trekking 3–4 days)',
     level: 'Moderate (Hemkund day is steep)',
-    stay: 'Lodges in Ghangaria',
+    stay: 'Lodges in Gangharia',
     guides: 'Available at Govindghat/Ghangaria',
     bestFor: 'Alpine meadows, 600+ flower species, sacred Hemkund lake',
-    images: [
-      'https://i.pinimg.com/736x/81/85/50/818550200b38ff8b8268e8cc2bad74b8.jpg',
-    ],
+    images: ['https://i.pinimg.com/736x/81/85/50/818550200b38ff8b8268e8cc2bad74b8.jpg'],
     notes: 'Start at Govindghat → Ghangaria; best July–Sept; Hemkund ~4,300 m climb day',
   },
-
-  // New: Rudranath (Panch Kedar)
   {
     id: 'rudranath',
     title: 'Rudranath Trek (Panch Kedar)',
@@ -85,13 +69,9 @@ const treks = [
     stay: 'Camps/Basic lodges en route (Panar Bugyal, etc.)',
     guides: 'Local guides from Sagar/Gopeshwar available',
     bestFor: 'Meadows, ridge walks, sacred Rudranath temple',
-    images: [
-      'https://i.pinimg.com/1200x/39/c2/ae/39c2aeed1e41aa29437aa196159d912a.jpg',
-    ],
+    images: ['https://i.pinimg.com/1200x/39/c2/ae/39c2aeed1e41aa29437aa196159d912a.jpg'],
     notes: 'Popular via Sagar → Panar Bugyal → Rudranath; long walking days at altitude',
   },
-
-  // New: Kedarnath (Yatra)
   {
     id: 'kedarnath',
     title: 'Kedarnath Trek (Yatra)',
@@ -101,9 +81,7 @@ const treks = [
     stay: 'Lodges/tents at Kedarnath or base camps',
     guides: 'Available at Gaurikund; ponies/palkis/porters/heli options',
     bestFor: 'Spiritual pilgrimage with high-altitude Himalayan views',
-    images: [
-      'https://i.pinimg.com/1200x/5c/da/2b/5cda2b99127c7afa6e1e2b6b08efd217.jpg',
-    ],
+    images: ['https://i.pinimg.com/1200x/5c/da/2b/5cda2b99127c7afa6e1e2b6b08efd217.jpg'],
     notes: 'Approx 16 km to ~3,583 m; best May–Jun & Sep–Oct; start early for weather and crowd',
   },
 ];
@@ -111,73 +89,9 @@ const treks = [
 export default function Trekking() {
   const trackRef = useRef(null);
 
-  // drag-to-scroll (desktop) + touch with passive listeners and momentum
-  useEffect(() => {
-    const el = trackRef.current;
-    if (!el) return;
-
-    // CSS hints for smooth mobile scroll
-    el.style.webkitOverflowScrolling = 'touch'; // iOS momentum scrolling [web:58]
-    el.style.touchAction = 'pan-x pinch-zoom';  // allow horizontal pan & zoom [web:219]
-
-    let isDown = false;
-    let isDragging = false;
-    let startX = 0;
-    let scrollLeft = 0;
-
-    const getPageX = (e) => (e.touches && e.touches[0]?.pageX) ?? e.pageX;
-
-    const onDown = (e) => {
-      isDown = true;
-      isDragging = false;
-      el.classList.add('cursor-grabbing');
-      startX = getPageX(e) - el.offsetLeft;
-      scrollLeft = el.scrollLeft;
-    };
-
-    const onMove = (e) => {
-      if (!isDown) return;
-      const x = getPageX(e) - el.offsetLeft;
-      const walk = (x - startX) * 1.0; // modest multiplier for control
-      if (Math.abs(walk) > 3) isDragging = true;
-      // Only prevent default when actively dragging to avoid blocking native scroll
-      if (isDragging && e.cancelable) e.preventDefault(); // [web:201][web:224]
-      el.scrollLeft = scrollLeft - walk;
-    };
-
-    const onLeaveUp = () => {
-      isDown = false;
-      isDragging = false;
-      el.classList.remove('cursor-grabbing');
-    };
-
-    // Touch: passive where possible; move must be non-passive if we may preventDefault
-    el.addEventListener('touchstart', onDown, { passive: true });   // [web:201]
-    el.addEventListener('touchend', onLeaveUp, { passive: true });  // [web:201]
-    el.addEventListener('touchmove', onMove, { passive: false });   // we may call preventDefault
-
-    // Mouse
-    el.addEventListener('mousedown', onDown);
-    el.addEventListener('mouseleave', onLeaveUp);
-    el.addEventListener('mouseup', onLeaveUp);
-    el.addEventListener('mousemove', onMove);
-
-    return () => {
-      el.removeEventListener('touchstart', onDown);
-      el.removeEventListener('touchend', onLeaveUp);
-      el.removeEventListener('touchmove', onMove);
-
-      el.removeEventListener('mousedown', onDown);
-      el.removeEventListener('mouseleave', onLeaveUp);
-      el.removeEventListener('mouseup', onLeaveUp);
-      el.removeEventListener('mousemove', onMove);
-    };
-  }, []);
-
   return (
     <section id="trekking" className="py-20 bg-white">
       <div className="max-w-7xl mx-auto px-4">
-        {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -192,15 +106,16 @@ export default function Trekking() {
         </motion.div>
 
         <div className="relative">
-          {/* Slider track (no arrows, no side fades) */}
+          {/* Native momentum + snap, no JS drag */}
           <div
             ref={trackRef}
+            style={{ WebkitOverflowScrolling: 'touch' }} /* iOS momentum */ /* [web:58] */
             className="
               flex gap-6 overflow-x-auto pb-2
-              snap-x snap-mandatory scroll-smooth overscroll-x-contain
-              [-ms-overflow-style:none] [scrollbar-width:none]
-              [&::-webkit-scrollbar]:hidden
-              select-none cursor-grab
+              snap-x snap-proximity scroll-smooth overscroll-x-contain
+              [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden
+              select-none touch-pan-x
+              will-change-scroll
             "
           >
             {treks.map((t, idx) => (
@@ -213,11 +128,11 @@ export default function Trekking() {
                 whileHover={{ y: -6 }}
                 className="
                   trek-card snap-start shrink-0 w-80 md:w-96
-                  bg-white rounded-2xl overflow-hidden shadow hover:shadow-lg transition-shadow
+                  bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-shadow
                 "
               >
                 <div className="relative w-full aspect-[4/3] bg-gray-100 overflow-hidden">
-                  {t.images && t.images.length > 0 ? (
+                  {t.images?.length ? (
                     <img
                       src={t.images[0]}
                       alt={`${t.title} ${t.area}`}

@@ -1,4 +1,4 @@
-import { useRef, useEffect } from 'react'
+import { useRef } from 'react'
 import { motion } from 'framer-motion'
 
 const destinations = [
@@ -19,67 +19,6 @@ const destinations = [
 export function Destinations() {
   const trackRef = useRef(null)
 
-  useEffect(() => {
-    const el = trackRef.current
-    if (!el) return
-
-    // CSS hints for momentum and touch behavior
-    el.style.webkitOverflowScrolling = 'touch' // iOS momentum
-    el.style.touchAction = 'pan-x pinch-zoom'  // allow horizontal pan, keep zoom
-
-    let isDown = false
-    let startX = 0
-    let scrollLeft = 0
-    let isDragging = false
-
-    const onDown = (e) => {
-      isDown = true
-      isDragging = false
-      el.classList.add('cursor-grabbing')
-      const pageX = (e.touches && e.touches[0]?.pageX) ?? e.pageX
-      startX = pageX - el.offsetLeft
-      scrollLeft = el.scrollLeft
-    }
-
-    const onMove = (e) => {
-      if (!isDown) return
-      const pageX = (e.touches && e.touches[0]?.pageX) ?? e.pageX
-      const x = pageX - el.offsetLeft
-      const walk = (x - startX) * 1.0 // keep multiplier modest to reduce jitter
-      if (Math.abs(walk) > 3) isDragging = true
-      // preventDefault ONLY while actively dragging to avoid blocking native scroll unnecessarily
-      if (isDragging && e.cancelable) e.preventDefault()
-      el.scrollLeft = scrollLeft - walk
-    }
-
-    const onLeaveUp = () => {
-      isDown = false
-      isDragging = false
-      el.classList.remove('cursor-grabbing')
-    }
-
-    // Passive for start/end improves scroll performance; move must be non-passive if we might preventDefault
-    el.addEventListener('touchstart', onDown, { passive: true })
-    el.addEventListener('touchend', onLeaveUp, { passive: true })
-    el.addEventListener('touchmove', onMove, { passive: false })
-
-    el.addEventListener('mousedown', onDown) // mouse events are non-passive by default
-    el.addEventListener('mouseleave', onLeaveUp)
-    el.addEventListener('mouseup', onLeaveUp)
-    el.addEventListener('mousemove', onMove)
-
-    return () => {
-      el.removeEventListener('touchstart', onDown)
-      el.removeEventListener('touchend', onLeaveUp)
-      el.removeEventListener('touchmove', onMove)
-
-      el.removeEventListener('mousedown', onDown)
-      el.removeEventListener('mouseleave', onLeaveUp)
-      el.removeEventListener('mouseup', onLeaveUp)
-      el.removeEventListener('mousemove', onMove)
-    }
-  }, [])
-
   return (
     <section id="destinations" className="py-20 bg-gray-50">
       <div className="max-w-7xl mx-auto px-4">
@@ -95,14 +34,16 @@ export function Destinations() {
         </motion.div>
 
         <div className="relative">
+          {/* Native momentum + snap, no JS drag */}
           <div
             ref={trackRef}
+            style={{ WebkitOverflowScrolling: 'touch' }} /* iOS momentum */ /* [web:58] */
             className="
               group flex gap-6 overflow-x-auto pb-2
-              snap-x snap-mandatory scroll-smooth overscroll-x-contain
-              [-ms-overflow-style:none] [scrollbar-width:none]
-              [&::-webkit-scrollbar]:hidden
-              select-none cursor-grab
+              snap-x snap-proximity scroll-smooth overscroll-x-contain
+              [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden
+              select-none touch-pan-x
+              will-change-scroll
             "
           >
             {destinations.map((destination, index) => (
@@ -114,12 +55,12 @@ export function Destinations() {
                 transition={{ delay: index * 0.05, duration: 0.5 }}
                 className="destination-card snap-start shrink-0 w-72 md:w-80"
               >
-                <div className="relative bg-white rounded-xl overflow-hidden shadow hover:shadow-lg transition-shadow border border-gray-100">
+                <div className="relative bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow border border-gray-100">
                   <div className="w-full aspect-[4/3] overflow-hidden">
                     <img
                       src={destination.image}
                       alt={destination.name}
-                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+                      className="w-full h-full object-cover"
                       loading="lazy"
                       decoding="async"
                     />
