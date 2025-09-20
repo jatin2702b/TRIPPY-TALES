@@ -54,7 +54,7 @@ const treks = [
     area: '(Govindghat–Ghangaria)',
     duration: '4–6 days (trekking 3–4 days)',
     level: 'Moderate (Hemkund day is steep)',
-    stay: 'Lodges in Gangharia',
+    stay: 'Lodges in Ghangaria',
     guides: 'Available at Govindghat/Ghangaria',
     bestFor: 'Alpine meadows, 600+ flower species, sacred Hemkund lake',
     images: ['https://i.pinimg.com/736x/81/85/50/818550200b38ff8b8268e8cc2bad74b8.jpg'],
@@ -86,7 +86,7 @@ const treks = [
   },
 ];
 
-export default function Trekking() {
+function Trekking() {
   const trackRef = useRef(null);
 
   return (
@@ -106,16 +106,14 @@ export default function Trekking() {
         </motion.div>
 
         <div className="relative">
-          {/* Native momentum + snap, no JS drag */}
           <div
             ref={trackRef}
-            style={{ WebkitOverflowScrolling: 'touch' }} /* iOS momentum */ /* [web:58] */
+            style={{ WebkitOverflowScrolling: 'touch' }}
             className="
               flex gap-6 overflow-x-auto pb-2
-              snap-x snap-proximity scroll-smooth overscroll-x-contain
+              snap-x snap-proximity scroll-smooth overscroll-x-contain overscroll-auto
               [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden
               select-none touch-pan-x
-              will-change-scroll
             "
           >
             {treks.map((t, idx) => (
@@ -161,21 +159,6 @@ export default function Trekking() {
                     <li><span className="font-medium">Best for:</span> {t.bestFor}</li>
                     {t.notes && <li className="text-gray-600">{t.notes}</li>}
                   </ul>
-
-                  {t.images && t.images.length > 1 && (
-                    <div className="mt-4 flex gap-2 overflow-x-auto">
-                      {t.images.slice(1).map((img, i) => (
-                        <img
-                          key={i}
-                          src={img}
-                          alt={`${t.title} preview ${i + 2}`}
-                          className="h-14 w-20 rounded object-cover border"
-                          loading="lazy"
-                          decoding="async"
-                        />
-                      ))}
-                    </div>
-                  )}
                 </div>
               </motion.article>
             ))}
@@ -185,3 +168,5 @@ export default function Trekking() {
     </section>
   );
 }
+
+export default Trekking
