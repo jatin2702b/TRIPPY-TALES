@@ -86,7 +86,7 @@ const treks = [
   },
 ];
 
-function Trekking() {
+export default function Trekking() {
   const trackRef = useRef(null);
 
   return (
@@ -108,12 +108,16 @@ function Trekking() {
         <div className="relative">
           <div
             ref={trackRef}
-            style={{ WebkitOverflowScrolling: 'touch' }}
+            style={{
+              WebkitOverflowScrolling: 'touch',
+              touchAction: 'manipulation'
+            }}
             className="
-              flex gap-6 overflow-x-auto pb-2
-              snap-x snap-proximity scroll-smooth overscroll-x-contain overscroll-auto
+              flex gap-6 overflow-x-auto overflow-y-hidden pb-2
+              snap-x snap-proximity scroll-smooth
+              overscroll-x-contain overscroll-y-auto
               [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden
-              select-none touch-pan-x
+              select-none
             "
           >
             {treks.map((t, idx) => (
@@ -168,5 +172,3 @@ function Trekking() {
     </section>
   );
 }
-
-export default Trekking
