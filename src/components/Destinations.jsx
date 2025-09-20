@@ -2,113 +2,81 @@ import { useRef, useEffect } from 'react'
 import { motion } from 'framer-motion'
 
 const destinations = [
-  {
-    name: 'Mussoorie–Landour',
-    image: 'https://i.pinimg.com/736x/53/72/0d/53720de90e51c15111ff6a0d3f0e3ebf.jpg',
-    description: 'Colonial-era charm, Lal Tibba views, and quiet cafes above Mussoorie'
-  }, // Landour is a tranquil cantonment just above Mussoorie
-
-  {
-    name: 'Chopta',
-    image: 'https://i.pinimg.com/1200x/91/00/55/91005566754f88e197ebad7ca2115028.jpg',
-    description: 'Mini Switzerland base for Tungnath–Chandrashila with grand Himalayan views'
-  }, // Base for Tungnath–Chandrashila
-
-  {
-    name: 'Valley of Flowers',
-    image: 'https://i.pinimg.com/736x/b2/db/1c/b2db1c2902681c1cc99f4d6edb79d3a1.jpg',
-    description: 'UNESCO alpine meadows blooming July–Sept with rare Himalayan flowers'
-  }, // UNESCO-listed alpine meadows
-
-  {
-    name: 'Naina Peak',
-    image: 'https://i.pinimg.com/736x/b9/0c/20/b90c20a5f698901e42b8e5428f9bad40.jpg',
-    description: 'Highest point of Nainital with panoramic lake and Himalayan views'
-  }, // Highest point around Nainital
-
-  {
-    name: 'Rishikesh',
-    image: 'https://i.pinimg.com/736x/7f/cf/e4/7fcfe474f29fbcc76cd1895f966b5a59.jpg',
-    description: 'Yoga capital with Ganga Aarti, rafting, camping, and ashram stays'
-  }, // Yoga, Ganga Aarti, rafting
-
-  {
-    name: 'Jageshwar Dham, Almora',
-    image: 'https://i.pinimg.com/1200x/87/4b/ec/874bec0fe75f308a014c0ac1fa2b6084.jpg',
-    description: 'Kumaon’s cultural heart on a ridge with heritage, crafts, and views'
-  }, // Historic ridge town in Kumaon
-
-  { 
-    name: 'Dhikuli', 
-    image: 'https://media-cdn.tripadvisor.com/media/photo-s/2b/be/d5/d6/caption.jpg', 
-    description: 'Gateway to Jim Corbett with luxury resorts and wildlife experiences' 
-  },
-  { 
-    name: 'Ramnagar', 
-    image: 'https://www.corbettnationalpark.in/blog/wp-content/uploads/2021/02/kosi-river1.jpg', 
-    description: 'Main Entrance Passage to the Renowned Jim Corbett National Park' 
-  },
-  { 
-    name: 'Jhirna Range', 
-    image: 'https://www.tusktravel.com/blog/wp-content/uploads/2021/03/Jim-Corbett-National-Park.jpg', 
-    description: 'Open year-round for wildlife safaris and bird watching' 
-  },
-  { 
-    name: 'Corbett Falls', 
-    image: 'https://www.tejomayaresorts.com/wp-content/uploads/2024/01/Corbett-waterfall-jim-corbett.jpg', 
-    description: 'Beautiful waterfall surrounded by dense forest' 
-  },
-  { 
-    name: 'Nainital', 
-    image: 'https://i.pinimg.com/736x/8e/c7/f3/8ec7f3401d3999a071cdaa85a19ce606.jpg', 
-    description: 'Queen of Hills with the Beautiful and Picturesque Naini Lake' 
-  },
-  { 
-    name: 'Bhimtal', 
-    image: 'https://i.pinimg.com/736x/c9/e4/4c/c9e44c5c2bc8927f365cf1c8a10f57dd.jpg', 
-    description: 'Serene lake town perfect for peaceful getaways' 
-  },
+  { name: 'Mussoorie–Landour', image: 'https://i.pinimg.com/736x/53/72/0d/53720de90e51c15111ff6a0d3f0e3ebf.jpg', description: 'Colonial-era charm, Lal Tibba views, and quiet cafes above Mussoorie' },
+  { name: 'Chopta', image: 'https://i.pinimg.com/1200x/91/00/55/91005566754f88e197ebad7ca2115028.jpg', description: 'Mini Switzerland base for Tungnath–Chandrashila with grand Himalayan views' },
+  { name: 'Valley of Flowers', image: 'https://i.pinimg.com/736x/b2/db/1c/b2db1c2902681c1cc99f4d6edb79d3a1.jpg', description: 'UNESCO alpine meadows blooming July–Sept with rare Himalayan flowers' },
+  { name: 'Naina Peak', image: 'https://i.pinimg.com/736x/b9/0c/20/b90c20a5f698901e42b8e5428f9bad40.jpg', description: 'Highest point of Nainital with panoramic lake and Himalayan views' },
+  { name: 'Rishikesh', image: 'https://i.pinimg.com/736x/7f/cf/e4/7fcfe474f29fbcc76cd1895f966b5a59.jpg', description: 'Yoga capital with Ganga Aarti, rafting, camping, and ashram stays' },
+  { name: 'Jageshwar Dham, Almora', image: 'https://i.pinimg.com/1200x/87/4b/ec/874bec0fe75f308a014c0ac1fa2b6084.jpg', description: 'Kumaon’s cultural heart on a ridge with heritage, crafts, and views' },
+  { name: 'Dhikuli', image: 'https://media-cdn.tripadvisor.com/media/photo-s/2b/be/d5/d6/caption.jpg', description: 'Gateway to Jim Corbett with luxury resorts and wildlife experiences' },
+  { name: 'Ramnagar', image: 'https://www.corbettnationalpark.in/blog/wp-content/uploads/2021/02/kosi-river1.jpg', description: 'Main Entrance Passage to the Renowned Jim Corbett National Park' },
+  { name: 'Jhirna Range', image: 'https://www.tusktravel.com/blog/wp-content/uploads/2021/03/Jim-Corbett-National-Park.jpg', description: 'Open year-round for wildlife safaris and bird watching' },
+  { name: 'Corbett Falls', image: 'https://www.tejomayaresorts.com/wp-content/uploads/2024/01/Corbett-waterfall-jim-corbett.jpg', description: 'Beautiful waterfall surrounded by dense forest' },
+  { name: 'Nainital', image: 'https://i.pinimg.com/736x/8e/c7/f3/8ec7f3401d3999a071cdaa85a19ce606.jpg', description: 'Queen of Hills with the Beautiful and Picturesque Naini Lake' },
+  { name: 'Bhimtal', image: 'https://i.pinimg.com/736x/c9/e4/4c/c9e44c5c2bc8927f365cf1c8a10f57dd.jpg', description: 'Serene lake town perfect for peaceful getaways' },
 ]
 
 export function Destinations() {
   const trackRef = useRef(null)
 
-  // drag-to-scroll for desktop + touch
   useEffect(() => {
     const el = trackRef.current
     if (!el) return
-    let isDown = false, startX = 0, scrollLeft = 0
+
+    // CSS hints for momentum and touch behavior
+    el.style.webkitOverflowScrolling = 'touch' // iOS momentum
+    el.style.touchAction = 'pan-x pinch-zoom'  // allow horizontal pan, keep zoom
+
+    let isDown = false
+    let startX = 0
+    let scrollLeft = 0
+    let isDragging = false
 
     const onDown = (e) => {
       isDown = true
+      isDragging = false
       el.classList.add('cursor-grabbing')
-      startX = (e.pageX || e.touches?.[0]?.pageX) - el.offsetLeft
+      const pageX = (e.touches && e.touches[0]?.pageX) ?? e.pageX
+      startX = pageX - el.offsetLeft
       scrollLeft = el.scrollLeft
     }
-    const onLeaveUp = () => { isDown = false; el.classList.remove('cursor-grabbing') }
+
     const onMove = (e) => {
       if (!isDown) return
-      e.preventDefault()
-      const x = (e.pageX || e.touches?.[0]?.pageX) - el.offsetLeft
-      const walk = (x - startX) * 1.2
+      const pageX = (e.touches && e.touches[0]?.pageX) ?? e.pageX
+      const x = pageX - el.offsetLeft
+      const walk = (x - startX) * 1.0 // keep multiplier modest to reduce jitter
+      if (Math.abs(walk) > 3) isDragging = true
+      // preventDefault ONLY while actively dragging to avoid blocking native scroll unnecessarily
+      if (isDragging && e.cancelable) e.preventDefault()
       el.scrollLeft = scrollLeft - walk
     }
 
-    el.addEventListener('mousedown', onDown)
+    const onLeaveUp = () => {
+      isDown = false
+      isDragging = false
+      el.classList.remove('cursor-grabbing')
+    }
+
+    // Passive for start/end improves scroll performance; move must be non-passive if we might preventDefault
+    el.addEventListener('touchstart', onDown, { passive: true })
+    el.addEventListener('touchend', onLeaveUp, { passive: true })
+    el.addEventListener('touchmove', onMove, { passive: false })
+
+    el.addEventListener('mousedown', onDown) // mouse events are non-passive by default
     el.addEventListener('mouseleave', onLeaveUp)
     el.addEventListener('mouseup', onLeaveUp)
     el.addEventListener('mousemove', onMove)
-    el.addEventListener('touchstart', onDown, { passive: true })
-    el.addEventListener('touchend', onLeaveUp)
-    el.addEventListener('touchmove', onMove, { passive: false })
+
     return () => {
+      el.removeEventListener('touchstart', onDown)
+      el.removeEventListener('touchend', onLeaveUp)
+      el.removeEventListener('touchmove', onMove)
+
       el.removeEventListener('mousedown', onDown)
       el.removeEventListener('mouseleave', onLeaveUp)
       el.removeEventListener('mouseup', onLeaveUp)
       el.removeEventListener('mousemove', onMove)
-      el.removeEventListener('touchstart', onDown)
-      el.removeEventListener('touchend', onLeaveUp)
-      el.removeEventListener('touchmove', onMove)
     }
   }, [])
 
@@ -127,13 +95,11 @@ export function Destinations() {
         </motion.div>
 
         <div className="relative">
-          {/* Slider track (no arrows) */}
           <div
             ref={trackRef}
             className="
-              group flex gap-6 overflow-x-auto pb-2 scroll-smooth
-              snap-x snap-mandatory
-              overscroll-x-contain
+              group flex gap-6 overflow-x-auto pb-2
+              snap-x snap-mandatory scroll-smooth overscroll-x-contain
               [-ms-overflow-style:none] [scrollbar-width:none]
               [&::-webkit-scrollbar]:hidden
               select-none cursor-grab
@@ -149,7 +115,6 @@ export function Destinations() {
                 className="destination-card snap-start shrink-0 w-72 md:w-80"
               >
                 <div className="relative bg-white rounded-xl overflow-hidden shadow hover:shadow-lg transition-shadow border border-gray-100">
-                  {/* Uniform image sizing */}
                   <div className="w-full aspect-[4/3] overflow-hidden">
                     <img
                       src={destination.image}
@@ -159,14 +124,9 @@ export function Destinations() {
                       decoding="async"
                     />
                   </div>
-
                   <div className="p-5">
-                    <h3 className="text-lg font-semibold mb-1 text-gray-900">
-                      {destination.name}
-                    </h3>
-                    <p className="text-gray-600 text-sm leading-relaxed">
-                      {destination.description}
-                    </p>
+                    <h3 className="text-lg font-semibold mb-1 text-gray-900">{destination.name}</h3>
+                    <p className="text-gray-600 text-sm leading-relaxed">{destination.description}</p>
                   </div>
                 </div>
               </motion.div>

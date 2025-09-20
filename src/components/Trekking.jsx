@@ -54,7 +54,6 @@ const treks = [
     guides: 'Optional; well-marked forest trail',
     bestFor: 'Highest point in Nainital, panoramic lake & Himalayan views',
     images: [
-      // Replace if preferred
       'https://i.pinimg.com/736x/41/b0/53/41b053a8e248e9f022ef1619472fb43f.jpg',
     ],
     notes: 'Approx 6 km climb to ~2,615 m; also called China/Cheena Peak',
@@ -71,7 +70,6 @@ const treks = [
     guides: 'Available at Govindghat/Ghangaria',
     bestFor: 'Alpine meadows, 600+ flower species, sacred Hemkund lake',
     images: [
-      // Replace if preferred
       'https://i.pinimg.com/736x/81/85/50/818550200b38ff8b8268e8cc2bad74b8.jpg',
     ],
     notes: 'Start at Govindghat → Ghangaria; best July–Sept; Hemkund ~4,300 m climb day',
@@ -88,7 +86,6 @@ const treks = [
     guides: 'Local guides from Sagar/Gopeshwar available',
     bestFor: 'Meadows, ridge walks, sacred Rudranath temple',
     images: [
-      // Replace if preferred
       'https://i.pinimg.com/1200x/39/c2/ae/39c2aeed1e41aa29437aa196159d912a.jpg',
     ],
     notes: 'Popular via Sagar → Panar Bugyal → Rudranath; long walking days at altitude',
@@ -105,7 +102,6 @@ const treks = [
     guides: 'Available at Gaurikund; ponies/palkis/porters/heli options',
     bestFor: 'Spiritual pilgrimage with high-altitude Himalayan views',
     images: [
-      // Replace if preferred
       'https://i.pinimg.com/1200x/5c/da/2b/5cda2b99127c7afa6e1e2b6b08efd217.jpg',
     ],
     notes: 'Approx 16 km to ~3,583 m; best May–Jun & Sep–Oct; start early for weather and crowd',
@@ -115,42 +111,66 @@ const treks = [
 export default function Trekking() {
   const trackRef = useRef(null);
 
-  // drag-to-scroll (desktop) + touch support
+  // drag-to-scroll (desktop) + touch with passive listeners and momentum
   useEffect(() => {
     const el = trackRef.current;
     if (!el) return;
-    let isDown = false, startX = 0, scrollLeft = 0;
+
+    // CSS hints for smooth mobile scroll
+    el.style.webkitOverflowScrolling = 'touch'; // iOS momentum scrolling [web:58]
+    el.style.touchAction = 'pan-x pinch-zoom';  // allow horizontal pan & zoom [web:219]
+
+    let isDown = false;
+    let isDragging = false;
+    let startX = 0;
+    let scrollLeft = 0;
+
+    const getPageX = (e) => (e.touches && e.touches[0]?.pageX) ?? e.pageX;
 
     const onDown = (e) => {
       isDown = true;
+      isDragging = false;
       el.classList.add('cursor-grabbing');
-      startX = (e.pageX || e.touches?.[0]?.pageX) - el.offsetLeft;
+      startX = getPageX(e) - el.offsetLeft;
       scrollLeft = el.scrollLeft;
     };
-    const onLeaveUp = () => { isDown = false; el.classList.remove('cursor-grabbing'); };
+
     const onMove = (e) => {
       if (!isDown) return;
-      e.preventDefault();
-      const x = (e.pageX || e.touches?.[0]?.pageX) - el.offsetLeft;
-      const walk = (x - startX) * 1.2;
+      const x = getPageX(e) - el.offsetLeft;
+      const walk = (x - startX) * 1.0; // modest multiplier for control
+      if (Math.abs(walk) > 3) isDragging = true;
+      // Only prevent default when actively dragging to avoid blocking native scroll
+      if (isDragging && e.cancelable) e.preventDefault(); // [web:201][web:224]
       el.scrollLeft = scrollLeft - walk;
     };
 
+    const onLeaveUp = () => {
+      isDown = false;
+      isDragging = false;
+      el.classList.remove('cursor-grabbing');
+    };
+
+    // Touch: passive where possible; move must be non-passive if we may preventDefault
+    el.addEventListener('touchstart', onDown, { passive: true });   // [web:201]
+    el.addEventListener('touchend', onLeaveUp, { passive: true });  // [web:201]
+    el.addEventListener('touchmove', onMove, { passive: false });   // we may call preventDefault
+
+    // Mouse
     el.addEventListener('mousedown', onDown);
     el.addEventListener('mouseleave', onLeaveUp);
     el.addEventListener('mouseup', onLeaveUp);
     el.addEventListener('mousemove', onMove);
-    el.addEventListener('touchstart', onDown, { passive: true });
-    el.addEventListener('touchend', onLeaveUp);
-    el.addEventListener('touchmove', onMove, { passive: false });
+
     return () => {
+      el.removeEventListener('touchstart', onDown);
+      el.removeEventListener('touchend', onLeaveUp);
+      el.removeEventListener('touchmove', onMove);
+
       el.removeEventListener('mousedown', onDown);
       el.removeEventListener('mouseleave', onLeaveUp);
       el.removeEventListener('mouseup', onLeaveUp);
       el.removeEventListener('mousemove', onMove);
-      el.removeEventListener('touchstart', onDown);
-      el.removeEventListener('touchend', onLeaveUp);
-      el.removeEventListener('touchmove', onMove);
     };
   }, []);
 
@@ -176,8 +196,8 @@ export default function Trekking() {
           <div
             ref={trackRef}
             className="
-              flex gap-6 overflow-x-auto pb-2 scroll-smooth
-              snap-x snap-mandatory overscroll-x-contain
+              flex gap-6 overflow-x-auto pb-2
+              snap-x snap-mandatory scroll-smooth overscroll-x-contain
               [-ms-overflow-style:none] [scrollbar-width:none]
               [&::-webkit-scrollbar]:hidden
               select-none cursor-grab
