@@ -1,6 +1,6 @@
 // src/components/EnquirySidebarOnEnd.jsx
 import { useEffect, useState } from "react";
-import WhatsAppInquiryForm from "./WhatsAppInquiryForm";
+import WhatsAppInquiryForm from "./WhatsAppInquiryForm.jsx";
 
 export default function EnquirySidebarOnEnd() {
   const [visible, setVisible] = useState(false);
