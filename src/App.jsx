@@ -18,7 +18,7 @@ import Chatbot from './components/Chatbot';
 
 // Form components
 import WhatsAppInquiryForm from './components/WhatsAppInquiryForm';
-import EnquirySidebarOnEnd from './components/enquirysidebaronend';
+import EnquirySidebarOnEnd from './components/EnquirySidebarOnEnd';
 
 export default function App() {
   return (
