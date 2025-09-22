@@ -1,6 +1,7 @@
 // src/App.jsx
 import React from 'react';
 
+// Core site sections
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import Destinations from './components/Destinations';
@@ -10,17 +11,23 @@ import ResortCatalog from './components/ResortCatalog';
 import Gallery from './components/Gallery';
 import About from './components/About';
 import Contact from './components/Contact';
+
+// Utility components
 import FloatingActions from './components/FloatingActions';
 import Chatbot from './components/Chatbot';
 
-// New: end-of-page left sidebar
+// Form components
+import WhatsAppInquiryForm from './components/WhatsAppInquiryForm';
 import EnquirySidebarOnEnd from './components/EnquirySidebarOnEnd';
 
 export default function App() {
   return (
     <div className="App">
+      {/* Navbar and hero */}
       <Navbar />
       <Hero />
+
+      {/* Main sections */}
       <Destinations />
       <Packages />
       <Trekking />
@@ -29,16 +36,20 @@ export default function App() {
       <About />
       <Contact />
 
-      {/* Left-side static form, only when footer is in view */}
+      {/* WhatsApp inquiry form (floating or in-page) */}
+      <WhatsAppInquiryForm />
+
+      {/* End-of-page left sidebar form */}
       <EnquirySidebarOnEnd />
 
-      {/* Make sure your footer/root footer area has this id */}
+      {/* Footer */}
       <footer id="site-footer" className="border-t">
         <div className="container mx-auto px-4 py-6 text-sm text-gray-600">
           © {new Date().getFullYear()} Trippy Tales. All rights reserved.
         </div>
       </footer>
 
+      {/* Utility floating components */}
       <FloatingActions />
       <Chatbot />
     </div>
