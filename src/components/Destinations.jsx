@@ -1,48 +1,54 @@
-import { useRef } from "react";
-import { motion } from "framer-motion";
+import { useRef, useState, useCallback, useMemo } from 'react';
+import { motion } from 'framer-motion';
 
 const destinations = [
-  { name: "Mussoorie–Landour", image: "https://i.pinimg.com/736x/53/72/0d/53720de90e51c15111ff6a0d3f0e3ebf.jpg", description: "Colonial-era charm, Lal Tibba views, and quiet cafes above Mussoorie" },
-  { name: "Chopta", image: "https://i.pinimg.com/1200x/91/00/55/91005566754f88e197ebad7ca2115028.jpg", description: "Mini Switzerland base for Tungnath–Chandrashila with grand Himalayan views" },
-  { name: "Valley of Flowers", image: "https://i.pinimg.com/736x/b2/db/1c/b2db1c2902681c1cc99f4d6edb79d3a1.jpg", description: "UNESCO alpine meadows blooming July–Sept with rare Himalayan flowers" },
-  { name: "Naina Peak", image: "https://i.pinimg.com/736x/b9/0c/20/b90c20a5f698901e42b8e5428f9bad40.jpg", description: "Highest point of Nainital with panoramic lake and Himalayan views" },
-  { name: "Auli", image: "https://i.pinimg.com/736x/7c/11/2b/7c112b4fcf9bde6f9f1f2e0c7ec7b8d3.jpg", description: "Famous ski destination with stunning Himalayan slopes and ropeways" },
-  { name: "Jim Corbett", image: "https://i.pinimg.com/736x/d1/ae/06/d1ae0622d3baf5ba1d138b6bbdf3d0e6.jpg", description: "Wildlife safari and luxury stays in India's first national park" },
-  { name: "Ranikhet", image: "https://i.pinimg.com/736x/18/34/0c/d218340cd2a3bcf7cb1a96c054b6ad9e.jpg", description: "Peaceful hill station surrounded by pine forests and Himalayan vistas" },
+  { name: 'Mussoorie–Landour', image: 'https://i.pinimg.com/736x/53/72/0d/53720de90e51c15111ff6a0d3f0e3ebf.jpg', description: 'Colonial-era charm, Lal Tibba views, and quiet cafes above Mussoorie' },
+  { name: 'Chopta', image: 'https://i.pinimg.com/1200x/91/00/55/91005566754f88e197ebad7ca2115028.jpg', description: 'Mini Switzerland base for Tungnath–Chandrashila with grand Himalayan views' },
+  { name: 'Valley of Flowers', image: 'https://i.pinimg.com/736x/b2/db/1c/b2db1c2902681c1cc99f4d6edb79d3a1.jpg', description: 'UNESCO alpine meadows blooming July–Sept with rare Himalayan flowers' },
+  { name: 'Naina Peak', image: 'https://i.pinimg.com/736x/b9/0c/20/b90c20a5f698901e42b8e5428f9bad40.jpg', description: 'Highest point of Nainital with panoramic lake and Himalayan views' },
+  { name: 'Rishikesh', image: 'https://i.pinimg.com/736x/7f/cf/e4/7fcfe474f29fbcc76cd1895f966b5a59.jpg', description: 'Yoga capital with Ganga Aarti, rafting, camping, and ashram stays' },
+  { name: 'Jageshwar Dham, Almora', image: 'https://i.pinimg.com/1200x/87/4b/ec/874bec0fe75f308a014c0ac1fa2b6084.jpg', description: 'Kumaon’s cultural heart on a ridge with heritage, crafts, and views' },
+  { name: 'Dhikuli', image: 'https://media-cdn.tripadvisor.com/media/photo-s/2b/be/d5/d6/caption.jpg', description: 'Gateway to Jim Corbett with luxury resorts and wildlife experiences' },
+  { name: 'Ramnagar', image: 'https://www.corbettnationalpark.in/blog/wp-content/uploads/2021/02/kosi-river1.jpg', description: 'Main Entrance Passage to the Renowned Jim Corbett National Park' },
+  { name: 'Jhirna Range', image: 'https://www.tusktravel.com/blog/wp-content/uploads/2021/03/Jim-Corbett-National-Park.jpg', description: 'Open year-round for wildlife safaris and bird watching' },
+  { name: 'Corbett Falls', image: 'https://www.tejomayaresorts.com/wp-content/uploads/2024/01/Corbett-waterfall-jim-corbett.jpg', description: 'Beautiful waterfall surrounded by dense forest' },
+  { name: 'Nainital', image: 'https://i.pinimg.com/736x/8e/c7/f3/8ec7f3401d3999a071cdaa85a19ce606.jpg', description: 'Queen of Hills with the Beautiful and Picturesque Naini Lake' },
+  { name: 'Bhimtal', image: 'https://i.pinimg.com/736x/c9/e4/4c/c9e44c5c2bc8927f365cf1c8a10f57dd.jpg', description: 'Serene lake town perfect for peaceful getaways' },
 ];
 
-export default function Destinations() {
+function Destinations() {
   const containerRef = useRef(null);
-  const startX = useRef(0);
-  const scrollLeft = useRef(0);
-  const isDragging = useRef(false);
+  const start = useRef({ x: 0, y: 0 });
+  const isHorizontal = useRef(false);
 
-  // Horizontal scroll for desktop mouse wheel
-  const onWheel = (e) => {
-    if (!containerRef.current) return;
-    if (containerRef.current.scrollWidth > containerRef.current.clientWidth) {
-      containerRef.current.scrollLeft += e.deltaY;
-      e.preventDefault();
+  const onStart = useCallback((e) => {
+    const touch = 'touches' in e ? e.touches[0] : e;
+    start.current = { x: touch.clientX, y: touch.clientY };
+    isHorizontal.current = false;
+  }, []);
+
+  const onMove = useCallback((e) => {
+    const touch = 'touches' in e ? e.touches[0] : e;
+    const dx = touch.clientX - start.current.x;
+    const dy = touch.clientY - start.current.y;
+
+    // Determine swipe direction on first move
+    if (!isHorizontal.current) {
+      if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > 5) {
+        isHorizontal.current = true;
+      } else if (Math.abs(dy) > Math.abs(dx)) {
+        isHorizontal.current = false;
+      }
     }
-  };
 
-  // Mobile touch handlers
-  const onTouchStart = (e) => {
-    isDragging.current = true;
-    startX.current = e.touches[0].pageX - containerRef.current.offsetLeft;
-    scrollLeft.current = containerRef.current.scrollLeft;
-  };
-
-  const onTouchMove = (e) => {
-    if (!isDragging.current) return;
-    const x = e.touches[0].pageX - containerRef.current.offsetLeft;
-    const walk = (startX.current - x); // positive => scroll right
-    containerRef.current.scrollLeft = scrollLeft.current + walk;
-  };
-
-  const onTouchEnd = () => {
-    isDragging.current = false;
-  };
+    // Only scroll horizontally if horizontal swipe
+    if (isHorizontal.current && containerRef.current) {
+      containerRef.current.scrollLeft -= dx;
+      start.current.x = touch.clientX;
+      start.current.y = touch.clientY;
+      e.preventDefault(); // prevent vertical scroll while horizontal dragging
+    }
+  }, []);
 
   return (
     <section id="destinations" className="py-20 bg-gray-50">
@@ -61,22 +67,15 @@ export default function Destinations() {
         <div className="relative">
           <div
             ref={containerRef}
-            onWheel={onWheel}
-            onTouchStart={onTouchStart}
-            onTouchMove={onTouchMove}
-            onTouchEnd={onTouchEnd}
-            className="
-              flex gap-6 overflow-x-auto pb-2
-              snap-x snap-mandatory scroll-smooth
-              touch-pan-x
-              [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden
-            "
-            style={{ WebkitOverflowScrolling: "touch" }}
+            className="flex gap-4 overflow-x-auto pb-2 snap-x snap-mandatory scroll-smooth touch-pan-x [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+            style={{ WebkitOverflowScrolling: 'touch' }}
+            onTouchStart={onStart}
+            onTouchMove={onMove}
           >
             {destinations.map((d, i) => (
               <motion.div
                 key={d.name + i}
-                className="snap-start flex-shrink-0 w-72 md:w-80"
+                className="shrink-0 w-72 md:w-80"
                 initial={{ opacity: 0, y: 8 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ root: containerRef, once: true }}
@@ -87,8 +86,10 @@ export default function Destinations() {
                     <img
                       src={d.image}
                       alt={d.name}
-                      className="w-full h-full object-cover pointer-events-none"
+                      className="w-full h-full object-cover"
                       loading="lazy"
+                      decoding="async"
+                      draggable={false}
                     />
                   </div>
                   <div className="p-5">
@@ -104,3 +105,5 @@ export default function Destinations() {
     </section>
   );
 }
+
+export default Destinations;
