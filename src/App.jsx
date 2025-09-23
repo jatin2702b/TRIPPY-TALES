@@ -18,7 +18,9 @@ import Chatbot from './components/Chatbot';
 
 // Floating form only
 // import WhatsAppInquiryForm from './components/WhatsAppInquiryForm'; // removed
-import EnquirySidebarOnEnd from './components/enquirysidebaronend.jsx';
+// src/App.jsx
+import EnquirySidebarOnEnd from './components/EnquirySidebarOnEnd';
+
 
 
 export default function App() {
