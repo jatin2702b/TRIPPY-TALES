@@ -16,6 +16,9 @@ import Contact from './components/Contact';
 import FloatingActions from './components/FloatingActions';
 import Chatbot from './components/Chatbot';
 
+// Floating WhatsApp popup (shows near footer)
+import EnquiryPopup from './components/EnquiryPopup';
+
 export default function App() {
   return (
     <div className="App">
@@ -32,7 +35,10 @@ export default function App() {
       <About />
       <Contact />
 
-      {/* Footer */}
+      {/* Floating popup that appears when footer enters view */}
+      <EnquiryPopup />
+
+      {/* Footer (observed by the popup) */}
       <footer id="site-footer" className="border-t">
         <div className="container mx-auto px-4 py-6 text-sm text-gray-600">
           © {new Date().getFullYear()} Trippy Tales. All rights reserved.
