@@ -19,14 +19,16 @@ const destinations = [
 export default function Destinations() {
   const containerRef = useRef(null);
 
-  // Only handle horizontal scroll when scrolling on container
+  // On mobile, allow vertical scroll naturally. Only shift-scroll triggers horizontal
   const onWheel = (e) => {
-    if (!containerRef.current) return;
-    // If horizontal scroll is possible, scroll horizontally
-    if (e.deltaX !== 0 || e.shiftKey) {
-      containerRef.current.scrollLeft += e.deltaY;
+    const container = containerRef.current;
+    if (!container) return;
+
+    if (e.shiftKey || Math.abs(e.deltaX) > Math.abs(e.deltaY)) {
+      container.scrollLeft += e.deltaY;
       e.preventDefault();
     }
+    // else vertical scroll works naturally
   };
 
   return (
@@ -47,7 +49,10 @@ export default function Destinations() {
           <div
             ref={containerRef}
             onWheel={onWheel}
-            className="flex gap-4 overflow-x-auto overflow-y-visible pb-2 snap-x snap-mandatory scroll-smooth touch-pan-x"
+            className="flex gap-4 overflow-x-auto overflow-y-visible snap-x snap-mandatory scroll-smooth touch-pan-x"
+            style={{
+              WebkitOverflowScrolling: 'touch', // iOS momentum scroll
+            }}
           >
             {destinations.map((d, i) => (
               <motion.div
