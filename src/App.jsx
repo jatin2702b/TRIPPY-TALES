@@ -16,10 +16,6 @@ import Contact from './components/Contact';
 import FloatingActions from './components/FloatingActions';
 import Chatbot from './components/Chatbot';
 
-// Floating form only
-// import WhatsAppInquiryForm from './components/WhatsAppInquiryForm'; // removed
-// src/App.jsx
-import EnquirySidebarOnEnd from './components/EnquirySidebarOnEnd';
 
 
 
