@@ -16,10 +16,9 @@ import Contact from './components/Contact';
 import FloatingActions from './components/FloatingActions';
 import Chatbot from './components/Chatbot';
 
-// Form components
-import WhatsAppInquiryForm from './components/WhatsAppInquiryForm';
+// Floating form only
+// import WhatsAppInquiryForm from './components/WhatsAppInquiryForm'; // removed
 import EnquirySidebarOnEnd from "./components/EnquirySidebarOnEnd.jsx";
-
 
 export default function App() {
   return (
@@ -37,13 +36,10 @@ export default function App() {
       <About />
       <Contact />
 
-      {/* WhatsApp inquiry form (floating or in-page) */}
-      <WhatsAppInquiryForm />
-
-      {/* End-of-page left sidebar form */}
+      {/* End-of-page left sidebar form (floating) */}
       <EnquirySidebarOnEnd />
 
-      {/* Footer */}
+      {/* Footer (observed by the floating sidebar) */}
       <footer id="site-footer" className="border-t">
         <div className="container mx-auto px-4 py-6 text-sm text-gray-600">
           © {new Date().getFullYear()} Trippy Tales. All rights reserved.
