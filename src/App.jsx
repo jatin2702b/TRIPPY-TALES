@@ -16,9 +16,6 @@ import Contact from './components/Contact';
 import FloatingActions from './components/FloatingActions';
 import Chatbot from './components/Chatbot';
 
-
-
-
 export default function App() {
   return (
     <div className="App">
@@ -35,10 +32,7 @@ export default function App() {
       <About />
       <Contact />
 
-      {/* End-of-page left sidebar form (floating) */}
-      <EnquirySidebarOnEnd />
-
-      {/* Footer (observed by the floating sidebar) */}
+      {/* Footer */}
       <footer id="site-footer" className="border-t">
         <div className="container mx-auto px-4 py-6 text-sm text-gray-600">
           © {new Date().getFullYear()} Trippy Tales. All rights reserved.
