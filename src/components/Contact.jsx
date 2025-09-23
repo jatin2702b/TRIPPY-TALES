@@ -53,8 +53,8 @@ export default function Contact() {
                 <path d="M20 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2Zm0 4-8 5L4 8V6l8 5 8-5v2Z" />
               </svg>
             </span>
-            <a href="mailto:jatin2702b@gmail.com" className="hover:underline">
-              jatin2702b@gmail.com
+            <a href="mailto:connect.trippytales@gmail.com" className="hover:underline">
+              connect.trippytales@gmail.com
             </a>
           </div>
         </div>

@@ -15,11 +15,7 @@ export default function About() {
             About Trippy Tales
           </h2>
           <p className="text-lg text-black/70 max-w-3xl mx-auto leading-relaxed">
-            Trippy Tales is a locally rooted, client-first travel company dedicated 
-            to creating seamless journeys across Uttarakhand. From wildlife escapes 
-            in Jim Corbett to cultural explorations in Kumaon and treks in the Garhwal 
-            Himalayas, we combine local knowledge with transparent planning to deliver 
-            safe, comfortable, and memorable travel experiences.
+            Trippy Tales is not just about travel—it’s about creating unforgettable stories. Whether you’re a family looking for a safe and joyful vacation, friends seeking adventure, a couple dreaming of romantic escapes, or a solo explorer chasing hidden gems, we design journeys that feel special, personalized, and truly memorable. With Trippy Tales, every trip becomes a tale you’ll cherish for a lifetime.
           </p>
         </motion.div>
 
