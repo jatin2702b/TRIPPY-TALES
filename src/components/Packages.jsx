@@ -7,7 +7,7 @@ const packages = [
     image: 'https://i.pinimg.com/736x/d1/ae/06/d1ae0622d3baf5ba1d138b6bbdf3d0e6.jpg',
     description: 'Dhikuli, Ramnagar & Jhirna Range exploration with luxury accommodation',
     features: ['Jeep Safari', 'Luxury Resort Stay', 'Meals included', 'Wildlife spotting & photography'],
-    whatsapp: '919876543210' // replace with your WhatsApp number
+    whatsapp: '9027070879' // replace with your WhatsApp number
   },
   {
     id: 'nainital_package',
@@ -15,7 +15,7 @@ const packages = [
     image: 'https://i.pinimg.com/1200x/65/cb/aa/65cbaa1f528cb47ee2eeb180bccc42aa.jpg',
     description: 'Nainital, Bhimtal & Sattal lake tour with sightseeing',
     features: ['Lake Boating', 'Mall Road Shopping', 'Cable Car Ride', 'Scenic Photography Spots'],
-    whatsapp: '919876543210' // replace with your WhatsApp number
+    whatsapp: '9027070879' // replace with your WhatsApp number
   }
 ]
 
