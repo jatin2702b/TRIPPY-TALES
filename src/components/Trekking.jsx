@@ -84,8 +84,6 @@ const treks = [
     images: ['https://i.pinimg.com/1200x/5c/da/2b/5cda2b99127c7afa6e1e2b6b08efd217.jpg'],
     notes: 'Approx 16 km to ~3,583 m; best May–Jun & Sep–Oct; start early for weather and crowd',
   },
-
-  // New: Pindari Glacier
   {
     id: 'pindari-glacier',
     title: 'Pindari Glacier Trek',
