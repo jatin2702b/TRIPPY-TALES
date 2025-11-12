@@ -12,7 +12,7 @@ export function Navbar() {
         <div className="flex justify-between items-center">
          <div className="flex flex-col">
     <h2 className="text-2xl font-bold text-blue-600 flex items-center gap-2">
-  Trippy Tales
+  tripyy tales
   <span className="text-sm text-gray-500 italic">— Trips that turn into tales</span>
 </h2>
 

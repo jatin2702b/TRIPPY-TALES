@@ -151,7 +151,7 @@ const ResortCatalog = () => {
   };
 
   const handleGetDetails = (resort) => {
-    const message = `Hello Trippy Tales,\nI'm interested in ${resort.name} (${resort.location}). Could you share details, availability, and best rates?`;
+    const message = `Hello tripyy tales,\nI'm interested in ${resort.name} (${resort.location}). Could you share details, availability, and best rates?`;
     const url = `https://wa.me/${BUSINESS_WHATSAPP}?text=${encodeURIComponent(message)}`;
     window.open(url, '_blank', 'noopener,noreferrer');
   };
@@ -175,7 +175,7 @@ const ResortCatalog = () => {
             Featured Resorts & Stays
           </h2>
           <p className="text-xl text-gray-600 mb-12 max-w-3xl mx-auto">
-            Discover handpicked accommodations in Uttarakhand's most beautiful destinations with Trippy Tales
+            Discover handpicked accommodations in Uttarakhand's most beautiful destinations with tripyy tales
           </p>
 
           <div className="flex flex-wrap justify-center gap-4 mb-8">

@@ -10,7 +10,7 @@ export default function WhatsAppForm() {
     notes: '',
   });
 
-  const WHATSAPP_NUMBER = '9027070879'; // replace with real number
+  const WHATSAPP_NUMBER = '919027070879'; // replace with real number
 
   const onChange = (e) => {
     const { name, value } = e.target;

@@ -12,7 +12,7 @@ const makeSrcSet = (rawUrl) => {
 }
 
 const slides = [
-  { image: 'https://images.unsplash.com/photo-1516426122078-c23e76319801', title: 'Discover Jim Corbett with Trippy Tales', subtitle: 'Your gateway to unforgettable wildlife adventures' },
+  { image: 'https://images.unsplash.com/photo-1516426122078-c23e76319801', title: 'Discover Jim Corbett with tripyy tales', subtitle: 'Your gateway to unforgettable wildlife adventures' },
   { image: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4', title: 'Explore Beautiful Nainital', subtitle: 'Experience the Queen of Hills' },
   { image: 'https://images.unsplash.com/photo-1544735716-392fe2489ffa', title: 'Munsyari Mountain Adventures', subtitle: 'Himalayan peaks and pristine valleys' },
   { image: 'https://i.pinimg.com/1200x/52/72/dd/5272dd7d02313daeb3f2deba7b2a19f3.jpg', title: 'Valley of Flowers Trek', subtitle: 'A paradise of alpine blooms and sacred lakes' },

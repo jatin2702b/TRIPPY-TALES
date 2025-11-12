@@ -23,9 +23,13 @@ export default function Contact() {
             <span className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-blue-50 text-blue-600">
               <PhoneIcon />
             </span>
-            <a href="tel:+919027070879" className="hover:underline">
-              +91 90270 70879
-            </a>
+            <a href="tel:+917906981852" className="hover:underline">
+  +91 79069 81852
+</a>
+<a href="tel:+919027070879" className="hover:underline">
+  +91 90270 70879
+</a>
+
           </div>
 
           {/* WhatsApp */}
@@ -53,8 +57,8 @@ export default function Contact() {
                 <path d="M20 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2Zm0 4-8 5L4 8V6l8 5 8-5v2Z" />
               </svg>
             </span>
-            <a href="mailto:connect.trippytales@gmail.com" className="hover:underline">
-              connect.trippytales@gmail.com
+            <a href="mailto:Tripyytales@gmail.com" className="hover:underline">
+              Tripyytales@gmail.com
             </a>
           </div>
         </div>

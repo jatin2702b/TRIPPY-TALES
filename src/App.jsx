@@ -41,7 +41,7 @@ export default function App() {
       {/* Footer (observed by the popup) */}
       <footer id="site-footer" className="border-t">
         <div className="container mx-auto px-4 py-6 text-sm text-gray-600">
-          © {new Date().getFullYear()} Trippy Tales. All rights reserved.
+          © {new Date().getFullYear()} tripyy tales. All rights reserved.
         </div>
       </footer>
 

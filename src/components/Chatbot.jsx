@@ -4,9 +4,9 @@ import { motion, AnimatePresence } from 'framer-motion'
 
 const chatbotResponses = {
   greeting: [
-    "Hello! Welcome to Trippy Tales! 🌟 How can I help plan the next Uttarakhand getaway?",
-    "Hi there! Ready for an adventure with Trippy Tales? Ask about destinations, treks, or packages!",
-    "Welcome to Trippy Tales! 🏔️ From Corbett safaris to Himalayan treks, how can I help today?"
+    "Hello! Welcome to tripyy tales! 🌟 How can I help plan the next Uttarakhand getaway?",
+    "Hi there! Ready for an adventure with tripyy tales? Ask about destinations, treks, or packages!",
+    "Welcome to tripyy tales! 🏔️ From Corbett safaris to Himalayan treks, how can I help today?"
   ],
   destinations: [
     "We cover Jim Corbett (Dhikuli, Ramnagar, Jhirna Range), Nainital–Bhimtal–Sattal, Mussoorie–Landour, Chopta, Rishikesh, Almora (Jageshwar Dham), plus Valley of Flowers and more. Which one interests you? 😊",
@@ -76,7 +76,7 @@ export default function Chatbot() {
   const [messages, setMessages] = useState([
     {
       type: 'bot',
-      text: "Hello! I’m your Trippy Tales assistant. Ask me about Corbett safaris, lakes trips, treks (Naina Peak, Chopta, Valley of Flowers, Kedarnath, Rudranath), pricing, or booking! 🌟",
+      text: "Hello! I’m your tripyy tales assistant. Ask me about Corbett safaris, lakes trips, treks (Naina Peak, Chopta, Valley of Flowers, Kedarnath, Rudranath), pricing, or booking! 🌟",
       time: new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})
     }
   ])
@@ -208,12 +208,12 @@ export default function Chatbot() {
             exit={{ opacity: 0, scale: 0.8, y: 100 }}
             className="fixed bottom-24 left-6 w-80 h-96 bg-white rounded-lg shadow-2xl z-50 flex flex-col overflow-hidden"
             role="dialog"
-            aria-label="Trippy Tales chat"
+            aria-label="tripyy tales chat"
           >
             {/* Header */}
             <div className="bg-gradient-to-r from-blue-600 to-purple-600 text-white p-4 flex justify-between items-center">
               <div>
-                <h3 className="font-semibold">Trippy Tales Bot</h3>
+                <h3 className="font-semibold">tripyy tales Bot</h3>
                 <p className="text-xs opacity-80">Online now</p>
               </div>
               <button

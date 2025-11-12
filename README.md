@@ -1,4 +1,4 @@
-# Trippy Tales - Travel Website
+# tripyy tales - Travel Website
 
 A modern, responsive travel website built with React, Vite, Tailwind CSS, and Framer Motion.
 
@@ -74,7 +74,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 - Thanks to all the amazing destinations in Uttarakhand
 - Built with love for travel enthusiasts
 ---
-**Made with ❤️ by Trippy Tales Team**
+**Made with ❤️ by tripyy tales Team**
 Features:
 - Modern React + Vite + Tailwind CSS setup
 - Responsive design with mobile support
