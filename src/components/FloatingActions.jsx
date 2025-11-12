@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { PhoneIcon, X } from "lucide-react";
+import PhoneIcon from "lucide-react/lib/icons/phone";
+import X from "lucide-react/lib/icons/x";
 
 // Smaller WhatsApp outlined logo (green stroke, transparent background)
 const WhatsAppOutlineLogo = () => (
