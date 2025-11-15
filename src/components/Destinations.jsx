@@ -21,8 +21,14 @@ export default function Destinations() {
   const containerRef = useRef(null);
 
   return (
-    <section id="destinations" className="py-20 bg-gray-50">
+    <section 
+      id="destinations" 
+      className="py-20 bg-gray-50"
+      aria-labelledby="destinations-heading"
+    >
       <div className="max-w-7xl mx-auto px-4">
+
+        {/* SEO-friendly heading */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -30,10 +36,19 @@ export default function Destinations() {
           transition={{ duration: 0.6 }}
           className="text-center mb-6"
         >
-          <h2 className="text-4xl font-bold text-gray-900">Our Destinations</h2>
-          <p className="text-gray-600 mt-2">Scroll to explore</p>
+          <h2 
+            className="text-4xl font-bold text-gray-900"
+            id="destinations-heading"
+          >
+            Popular Destinations in Uttarakhand
+          </h2>
+
+          <p className="text-gray-600 mt-2">
+            Explore curated travel spots across Jim Corbett, Nainital, Rishikesh, Almora, Chopta & more
+          </p>
         </motion.div>
 
+        {/* Scroll container */}
         <div className="relative">
           <div
             ref={containerRef}
@@ -60,18 +75,28 @@ export default function Destinations() {
                 className="snap-start shrink-0 w-72 md:w-80 bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-shadow"
               >
                 <div className="relative w-full aspect-[4/3] overflow-hidden">
+                  
+                  {/* SEO-optimized alt */}
                   <img
                     src={d.image}
-                    alt={d.name}
+                    alt={`${d.name} - Uttarakhand tourist destination`}
                     className="w-full h-full object-cover"
                     loading="lazy"
                     decoding="async"
                   />
+
                   <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
                 </div>
+
                 <div className="p-5">
-                  <h3 className="text-lg font-semibold text-gray-900">{d.name}</h3>
-                  <p className="text-gray-600 text-sm mt-1 leading-relaxed">{d.description}</p>
+                  <h3 className="text-lg font-semibold text-gray-900">
+                    {d.name}
+                  </h3>
+
+                  {/* Keyword-rich but unchanged description */}
+                  <p className="text-gray-600 text-sm mt-1 leading-relaxed">
+                    {d.description}
+                  </p>
                 </div>
               </motion.article>
             ))}

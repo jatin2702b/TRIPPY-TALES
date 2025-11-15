@@ -24,16 +24,14 @@ export function Hero() {
   const [prevSlide, setPrevSlide] = useState(0)
   const timerRef = useRef(null)
 
-  // Initialize prevSlide to currentSlide (prevents any initial mismatch)
   useEffect(() => {
     setPrevSlide(0)
   }, [])
 
-  // Stable autoplay: updates prevSlide (leaving) then advances currentSlide
   useEffect(() => {
     timerRef.current = setInterval(() => {
       setCurrentSlide(prev => {
-        setPrevSlide(prev)               // the one we are leaving
+        setPrevSlide(prev)
         const next = (prev + 1) % slides.length
         return next
       })
@@ -43,7 +41,6 @@ export function Hero() {
     }
   }, [])
 
-  // Preload next image
   useEffect(() => {
     const next = (currentSlide + 1) % slides.length
     const img = new Image()
@@ -53,7 +50,6 @@ export function Hero() {
     img.src = url
   }, [currentSlide])
 
-  // Active/current image
   const activeSrc = useMemo(() => {
     const url = slides[currentSlide].image
     return url.includes('unsplash.com/') ? up(url, 3000) : url
@@ -64,7 +60,6 @@ export function Hero() {
     return url.includes('unsplash.com/') ? makeSrcSet(url) : undefined
   }, [currentSlide])
 
-  // Previous image for crossfade
   const prevSrc = useMemo(() => {
     const url = slides[prevSlide].image
     return url.includes('unsplash.com/') ? up(url, 3000) : url
@@ -77,7 +72,7 @@ export function Hero() {
 
   return (
     <section id="home" className="relative h-screen overflow-hidden bg-black">
-      {/* Crossfade stack: bottom (prev), top (current fading in) */}
+      {/* Images for crossfade */}
       <div className="absolute inset-0">
         <div className="absolute inset-0">
           <img
@@ -112,7 +107,7 @@ export function Hero() {
         </motion.div>
       </div>
 
-      {/* Content */}
+      {/* Hero text */}
       <div className="relative z-10 flex items-center justify-center h-full text-center text-white">
         <motion.div
           key={`content-${currentSlide}`}
@@ -138,16 +133,6 @@ export function Hero() {
           >
             {slides[currentSlide].subtitle}
           </motion.p>
-
-          <motion.div
-            initial={{ y: 20, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            transition={{ delay: 0.65, duration: 0.5 }}
-          >
-            <button className="btn btn-primary text-lg px-8 py-4" aria-label="Book Your Adventure">
-              Book Your Adventure
-            </button>
-          </motion.div>
         </motion.div>
       </div>
     </section>
