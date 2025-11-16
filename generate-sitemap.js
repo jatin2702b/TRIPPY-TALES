@@ -1,30 +1,43 @@
-import fs from 'fs';
+import fs from "fs";
+import path from "path";
 
-const baseUrl = 'https://www.tripyytales.com';
+const baseUrl = "https://www.tripyytales.com";
 
-const pages = [
-  '', // homepage
-  'about',
-  'packages',
-  'contact'
-  // Add more routes here as needed
+const routes = [
+  "/",                 // homepage
+  "/about",
+  "/packages",
+  "/contact",
+
+  // Add your extra pages here:
+  // "/packages/jim-corbett",
+  // "/packages/nainital",
+  // "/treks/chopta",
+  // "/treks/nag-tibba",
 ];
 
-const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  ${pages
-    .map(
-      (page) => `
-    <url>
-      <loc>${baseUrl}/${page}</loc>
-      <changefreq>weekly</changefreq>
-      <priority>0.8</priority>
-    </url>
-  `
-    )
-    .join('')}
-</urlset>
-`;
+function generateSitemap() {
+  const urls = routes
+    .map((route) => {
+      return `
+        <url>
+          <loc>${baseUrl}${route}</loc>
+          <changefreq>weekly</changefreq>
+          <priority>${route === "/" ? "1.0" : "0.8"}</priority>
+        </url>
+      `;
+    })
+    .join("");
 
-fs.writeFileSync('dist/sitemap.xml', sitemap);
-console.log('✅ sitemap.xml generated in dist/');
+  const xml = `<?xml version="1.0" encoding="UTF-8"?>
+  <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+    ${urls}
+  </urlset>`;
+
+  // Write directly into public/ (SAFE)
+  fs.writeFileSync(path.resolve("public", "sitemap.xml"), xml);
+
+  console.log("✅ sitemap.xml created inside /public");
+}
+
+generateSitemap();
