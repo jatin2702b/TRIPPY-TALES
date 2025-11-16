@@ -20,23 +20,14 @@ export default function SEO() {
       />
       <meta property="og:type" content="website" />
       <meta property="og:url" content="https://www.tripyytales.com" />
-      <meta property="og:image" content="https://i.postimg.cc/8cXfy4p2/Poster-Adventure-Awaits.png" />
 
-      {/* Instagram link for social preview */}
+      {/* OG Image (Poster) */}
+      <meta property="og:image" content="https://i.postimg.cc/8cXfy4p2/Poster-Adventure-Awaits.png" />
+      <meta property="og:image:width" content="1200" />
+      <meta property="og:image:height" content="630" />
+
       <meta property="og:site_name" content="Tripyy Tales" />
       <meta property="og:locale" content="en_IN" />
-      <meta property="og:see_also" content="https://www.instagram.com/tripyytales__official?igsh=MXRncXpxb3drNWRsbw==" />
-
-      {/* Twitter / X - Commented for future use */}
-      {/*
-      <meta name="twitter:card" content="summary_large_image" />
-      <meta name="twitter:title" content="Tripyy Tales – Explore Uttarakhand's Best Destinations & Tours" />
-      <meta
-        name="twitter:description"
-        content="Tripyy Tales offers curated travel experiences in Jim Corbett & Uttarakhand. Wildlife safaris, trekking, luxury stays, and adventure tours for your next vacation."
-      />
-      <meta name="twitter:image" content="https://www.tripyytales.com/og-image.jpg" />
-      */}
 
       {/* JSON-LD Structured Data */}
       <script type="application/ld+json">
@@ -49,7 +40,8 @@ export default function SEO() {
           "sameAs": [
             "https://www.instagram.com/tripyy_tales"
           ],
-          "description": "Tripyy Tales offers curated travel experiences in Jim Corbett & Uttarakhand. Wildlife safaris, trekking, luxury stays, and adventure tours for your next vacation.",
+          "description":
+            "Tripyy Tales offers curated travel experiences in Jim Corbett & Uttarakhand. Wildlife safaris, trekking, luxury stays, and adventure tours for your next vacation.",
           "address": {
             "@type": "PostalAddress",
             "addressLocality": "Uttarakhand",
