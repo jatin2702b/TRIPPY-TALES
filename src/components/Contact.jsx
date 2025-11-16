@@ -41,7 +41,7 @@ export default function Contact() {
               </svg>
             </span>
             <a
-              href="https://wa.me/919027070879?text=Hi%20Trippy%20Tales!%20I'm%20interested%20in%20your%20tour%20packages."
+              href="https://wa.me/917906981852?text=Hi%20Trippy%20Tales!%20I'm%20interested%20in%20your%20tour%20packages."
               target="_blank"
               rel="noopener noreferrer"
               className="hover:underline"
