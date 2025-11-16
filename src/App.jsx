@@ -19,9 +19,20 @@ import Chatbot from './components/Chatbot';
 // Floating WhatsApp popup (shows near footer)
 import EnquiryPopup from './components/EnquiryPopup';
 
+// SEO Component
+import SEO from './components/SEO';
+
 export default function App() {
   return (
     <div className="App">
+      {/* SEO tags for the site */}
+      <SEO
+        title="Trippy Tales – Jim Corbett & Uttarakhand Travel Packages"
+        description="Explore curated travel packages, trekking tours, resorts, and guided wildlife safaris in Jim Corbett & Uttarakhand with Trippy Tales."
+        url="https://www.tripyytales.com"
+        image="https://www.tripyytales.com/og-image.jpg"
+      />
+
       {/* Navbar and hero */}
       <Navbar />
       <Hero />
