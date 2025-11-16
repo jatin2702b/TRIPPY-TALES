@@ -5,50 +5,41 @@ import { Helmet } from 'react-helmet';
 export default function SEO() {
   return (
     <Helmet>
-      {/* Page Meta */}
-      <title>Tripyy Tales – Explore Uttarakhand's Best Destinations & Tours</title>
+      {/* HTML Meta Tags */}
+      <title>Tripyy Tales – Jim Corbett Safari & Uttarakhand Tours</title>
       <meta
         name="description"
-        content="Tripyy Tales offers curated travel experiences in Jim Corbett & Uttarakhand. Wildlife safaris, trekking, luxury stays, and adventure tours for your next vacation."
+        content="Book Corbett Safari, Nainital tour packages, Chopta treks and luxury resort stays with Tripyy Tales."
       />
 
-      {/* Open Graph / Social Sharing */}
-      <meta property="og:title" content="Tripyy Tales – Explore Uttarakhand's Best Destinations & Tours" />
+      {/* Open Graph / Facebook Meta Tags */}
+      <meta property="og:url" content="https://tripyytales.com" />
+      <meta property="og:type" content="website" />
+      <meta property="og:title" content="Tripyy Tales – Jim Corbett Safari & Uttarakhand Tours" />
       <meta
         property="og:description"
-        content="Tripyy Tales offers curated travel experiences in Jim Corbett & Uttarakhand. Wildlife safaris, trekking, luxury stays, and adventure tours for your next vacation."
+        content="Book Corbett Safari, Nainital tour packages, Chopta treks and luxury resort stays with Tripyy Tales."
       />
-      <meta property="og:type" content="website" />
-      <meta property="og:url" content="https://www.tripyytales.com" />
-
-      {/* OG Image (Poster) */}
-      <meta property="og:image" content="https://i.postimg.cc/8cXfy4p2/Poster-Adventure-Awaits.png" />
+      <meta
+        property="og:image"
+        content="https://i.pinimg.com/1200x/65/cb/aa/65cbaa1f528cb47ee2eeb180bccc42aa.jpg"
+      />
       <meta property="og:image:width" content="1200" />
       <meta property="og:image:height" content="630" />
 
-      <meta property="og:site_name" content="Tripyy Tales" />
-      <meta property="og:locale" content="en_IN" />
-
-      {/* JSON-LD Structured Data */}
-      <script type="application/ld+json">
-        {JSON.stringify({
-          "@context": "https://schema.org",
-          "@type": "TravelAgency",
-          "name": "Tripyy Tales",
-          "url": "https://www.tripyytales.com",
-          "logo": "https://i.postimg.cc/1zKtCBM0/Crisp-Minimalist-Logo-for-Tripyy-Tales.png",
-          "sameAs": [
-            "https://www.instagram.com/tripyy_tales"
-          ],
-          "description":
-            "Tripyy Tales offers curated travel experiences in Jim Corbett & Uttarakhand. Wildlife safaris, trekking, luxury stays, and adventure tours for your next vacation.",
-          "address": {
-            "@type": "PostalAddress",
-            "addressLocality": "Uttarakhand",
-            "addressCountry": "IN"
-          }
-        })}
-      </script>
+      {/* Twitter Meta Tags */}
+      <meta name="twitter:card" content="summary_large_image" />
+      <meta property="twitter:domain" content="tripyytales.com" />
+      <meta property="twitter:url" content="https://tripyytales.com" />
+      <meta name="twitter:title" content="Tripyy Tales – Jim Corbett Safari & Uttarakhand Tours" />
+      <meta
+        name="twitter:description"
+        content="Book Corbett Safari, Nainital tour packages, Chopta treks and luxury resort stays with Tripyy Tales."
+      />
+      <meta
+        name="twitter:image"
+        content="https://i.pinimg.com/1200x/65/cb/aa/65cbaa1f528cb47ee2eeb180bccc42aa.jpg"
+      />
     </Helmet>
   );
 }
