@@ -20,7 +20,7 @@ export default function SEO() {
       />
       <meta property="og:type" content="website" />
       <meta property="og:url" content="https://www.tripyytales.com" />
-      <meta property="og:image" content="https://www.tripyytales.com/og-image.jpg" />
+      <meta property="og:image" content="https://www.canva.com/design/DAG41gwWdpg/ARYHasxquAW4p29aHnXOSA/edit" />
 
       {/* Instagram link for social preview */}
       <meta property="og:site_name" content="Tripyy Tales" />
@@ -45,7 +45,7 @@ export default function SEO() {
           "@type": "TravelAgency",
           "name": "Tripyy Tales",
           "url": "https://www.tripyytales.com",
-          "logo": "https://www.tripyytales.com/logo.png",
+          "logo": "https://www.canva.com/design/DAG41giJZuY/2cPTL-7YYmelagxyDp2jcw/edit",
           "sameAs": [
             "https://www.instagram.com/tripyy_tales"
           ],
