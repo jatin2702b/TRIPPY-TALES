@@ -24,8 +24,7 @@ const ResortCatalog = () => {
       location: "Dhikuli, Jim Corbett National Park, Uttarakhand",
       description:
         "Stay at Maulik Mansion Resort with luxury amenities, wildlife safaris, nature walks, and comfortable accommodation near Corbett.",
-      image:
-        "https://onlinecorbettresorts.com/img/ToursImage_259_3917.jpg",
+      image: "https://onlinecorbettresorts.com/img/ToursImage_259_3917.jpg",
       rating: 4.8,
       reviews: 156,
       category: ["wildlife", "nature"],
@@ -37,8 +36,7 @@ const ResortCatalog = () => {
       location: "Mukteshwar, Uttarakhand",
       description:
         "Experience panoramic mountain views, forest trails, and adventure activities at Trishul Resort in Mukteshwar.",
-      image:
-        "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/25/9d/ca/27/resorts-by-the-baagh.jpg?w=900&h=500&s=1",
+      image: "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/25/9d/ca/27/resorts-by-the-baagh.jpg?w=900&h=500&s=1",
       rating: 4.6,
       reviews: 89,
       category: ["lake", "mountain"],
@@ -50,8 +48,7 @@ const ResortCatalog = () => {
       location: "Ranikhet, Uttarakhand",
       description:
         "A cozy heritage stay in West View Hotel, Ranikhet surrounded by pine forests with trekking, photography, and serene views.",
-      image:
-        "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/18/34/0c/d2/west-view-ranikhet.jpg?w=900&h=500&s=1",
+      image: "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/18/34/0c/d2/west-view-ranikhet.jpg?w=900&h=500&s=1",
       rating: 4.4,
       reviews: 124,
       category: ["waterfall", "adventure"],
@@ -63,8 +60,7 @@ const ResortCatalog = () => {
       location: "Nainital, Uttarakhand",
       description:
         "Stay at Balrampur House, Nainital with lake views, lush greenery, bird watching, peaceful ambience and nature walks.",
-      image:
-        "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/08/25/3d/98/balrampur-house.jpg?w=900&h=500&s=1",
+      image: "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/08/25/3d/98/balrampur-house.jpg?w=900&h=500&s=1",
       rating: 4.5,
       reviews: 78,
       category: ["camping", "riverside", "mountain", "lake"],
@@ -76,8 +72,7 @@ const ResortCatalog = () => {
       location: "Chaukori, Pithoragarh, Uttarakhand",
       description:
         "Stay at Ojaswi Resort, Chaukori with stunning Himalayan views, trekking paths, nature photography and peaceful ambience.",
-      image:
-        "https://assets.simplotel.com/simplotel/image/upload/x_0,y_0,w_2448,h_1377,r_0,c_crop,q_80,fl_progressive/w_900,f_auto,c_fit/ojaswi-resort-chaukori/Snow_Capped_4_Ojaswi_Hotel_and_Resort_in_Chaukori_mewbtu",
+      image: "https://assets.simplotel.com/simplotel/image/upload/x_0,y_0,w_2448,h_1377,r_0,c_crop,q_80,fl_progressive/w_900,f_auto/c_fit/ojaswi-resort-chaukori/Snow_Capped_4_Ojaswi_Hotel_and_Resort_in_Chaukori_mewbtu",
       rating: 4.7,
       reviews: 203,
       category: ["luxury"],
@@ -89,8 +84,7 @@ const ResortCatalog = () => {
       location: "Almora, Uttarakhand",
       description:
         "Imperial Heights, Almora offers panoramic mountain views, trekking trails, photography spots and premium hillside stay.",
-      image:
-        "https://imgs.search.brave.com/dFUakT8DD5Fwyg0x8BtF-sjk2XAZuRCFaDp-sFDibFg/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9jb250/ZW50LmpkbWFnaWNi/b3guY29tL2NvbXAv/YWxtb3JhL2M3Lzk5/OTlwNTk2Mi41OTYy/LjE0MDcwNzEwMzcw/NS50OWM3L2NhdGFs/b2d1ZS9pbXBlcmlh/bC1oZWlnaHRzLWFs/bW9yYS1oby1hbG1v/cmEtaG90ZWxzLW14/ZjZldmE1Mm4uanBn/P3c9Mzg0MCZxPTc1",
+      image: "https://imgs.search.brave.com/dFUakT8DD5Fwyg0x8BtF-sjk2XAZuRCFaDp-sFDibFg/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9jb250/ZW50LmpkbWFnaWNi/b3guY29tL2NvbXAv/YWxtb3JhL2M3Lzk5/OTlwNTk2Mi41OTYy/LjE0MDcwNzEwMzcw/NS50OWM3L2NhdGFs/b2d1ZS9pbXBlcmlh/bC1oZWlnaHRzLWFs/bW9yYS1oby1hbG1v/cmEtaG90ZWxzLW14/ZjZldmE1Mm4uanBn/P3c9Mzg0MCZxPTc1",
       rating: 4.9,
       reviews: 167,
       category: ["camping", "nature"],
@@ -102,8 +96,7 @@ const ResortCatalog = () => {
       location: "Rishikesh, Uttarakhand",
       description:
         "Enjoy riverside camping, rafting, bonfires, nature trails and adventure activities at Shivpuri Camps near Rishikesh.",
-      image:
-        "https://imgs.search.brave.com/MsXaA-r2xefyJY2muGudW6W6ujCQRSO8YlW6r-6YZ0s/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9yaXNo/aWtlc2guY2FtcC93/cC1jb250ZW50L3Vw/bG9hZHMvMjAyNC8x/MC9TaGl2cHVyaS1C/ZWFjaC1SaXZlcnNp/ZGUtQ2FtcGluZy1p/bi1SaXNoaWtlc2gu/anBn",
+      image: "https://imgs.search.brave.com/MsXaA-r2xefyJY2muGudW6W6ujCQRSO8YlW6r-6YZ0s/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9yaXNo/aWtlc2guY2FtcC93/cC1jb250ZW50L3Vw/bG9hZHMvMjAyNC8x/MC9TaGl2cHVyaS1C/ZWFjaC1SaXZlcnNp/ZGUtQ2FtcGluZy1p/bi1SaXNoaWtlc2gu/anBn",
       rating: 4.6,
       reviews: 142,
       category: ["adventure", "riverside", "spiritual"],
@@ -160,15 +153,18 @@ const ResortCatalog = () => {
     const full = Math.floor(rating);
     const isHalf = rating % 1 !== 0;
     let stars = [];
-    for (let i = 0; i < full; i++) stars.push(<FontAwesomeIcon key={`full-${i}`} icon={faStar} className="text-yellow-400" />);
-    if (isHalf) stars.push(<FontAwesomeIcon key="half" icon={faStarHalfStroke} className="text-yellow-400" />);
-    for (let i = 0; i < 5 - Math.ceil(rating); i++) stars.push(<FontAwesomeIcon key={`empty-${i}`} icon={faStarRegular} className="text-yellow-400" />);
+    for (let i = 0; i < full; i++)
+      stars.push(<FontAwesomeIcon key={`full-${i}`} icon={faStar} className="text-yellow-400" />);
+    if (isHalf)
+      stars.push(<FontAwesomeIcon key="half" icon={faStarHalfStroke} className="text-yellow-400" />);
+    for (let i = 0; i < 5 - Math.ceil(rating); i++)
+      stars.push(<FontAwesomeIcon key={`empty-${i}`} icon={faStarRegular} className="text-yellow-400" />);
     return stars;
   };
 
   return (
     <section
-      id="resorts"
+      id="resorts" // <-- Fixed section id for navbar linking
       className="py-20 bg-gradient-to-br from-blue-50 via-white to-green-50 min-h-screen"
       itemScope
       itemType="https://schema.org/ItemList"
