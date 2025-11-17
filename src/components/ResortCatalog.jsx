@@ -164,7 +164,7 @@ const ResortCatalog = () => {
 
   return (
     <section
-      id="resorts" // <-- Fixed section id for navbar linking
+      id="resortscatalog" // <-- Fixed section id for navbar linking
       className="py-20 bg-gradient-to-br from-blue-50 via-white to-green-50 min-h-screen"
       itemScope
       itemType="https://schema.org/ItemList"
