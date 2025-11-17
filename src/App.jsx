@@ -7,6 +7,7 @@ import Hero from './components/Hero';
 import Destinations from './components/Destinations';
 import Packages from './components/Packages';
 import Trekking from './components/Trekking';
+import CorporateShowMore from './components/CorporateShowMore'; // ✅ Updated import
 import ResortCatalog from './components/ResortCatalog';
 import Gallery from './components/Gallery';
 import About from './components/About';
@@ -41,6 +42,10 @@ export default function App() {
       <Destinations />
       <Packages />
       <Trekking />
+
+      {/* ⬇⬇ NEW ENHANCED CORPORATE SHOW MORE SECTION ⬇⬇ */}
+      <CorporateShowMore />
+
       <ResortCatalog />
       <Gallery />
       <About />

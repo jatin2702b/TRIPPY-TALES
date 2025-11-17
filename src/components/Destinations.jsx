@@ -13,7 +13,7 @@ const destinations = [
   { name: 'Ramnagar', image: 'https://www.corbettnationalpark.in/blog/wp-content/uploads/2021/02/kosi-river1.jpg', description: 'Main Entrance Passage to the Renowned Jim Corbett National Park' },
   { name: 'Jhirna Range', image: 'https://www.tusktravel.com/blog/wp-content/uploads/2021/03/Jim-Corbett-National-Park.jpg', description: 'Open year-round for wildlife safaris and bird watching' },
   { name: 'Corbett Falls', image: 'https://www.tejomayaresorts.com/wp-content/uploads/2024/01/Corbett-waterfall-jim-corbett.jpg', description: 'Beautiful waterfall surrounded by dense forest' },
-  { name: 'Nainital', image: 'https://i.pinimg.com/736x/8e/c7/f3/8ec7f3401d3999a071cdaa85a19ce606.jpg', description: 'Queen of Hills with the Beautiful and Picturesque Naini Lake' },
+  { name: 'Nainital', image: 'https://i.pinimg.com/1200x/24/d1/ac/24d1ac195a4faa475e6cfd9bfc9f8c23.jpg', description: 'Queen of Hills with the Beautiful and Picturesque Naini Lake' },
   { name: 'Bhimtal', image: 'https://i.pinimg.com/736x/c9/e4/4c/c9e44c5c2bc8927f365cf1c8a10f57dd.jpg', description: 'Serene lake town perfect for peaceful getaways' },
 ];
 

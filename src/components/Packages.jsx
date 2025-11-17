@@ -14,13 +14,13 @@ const packages = [
       'Meals Included (Breakfast/Dinner)',
       'Wildlife Spotting & Nature Photography'
     ],
-    whatsapp: '9027070879'
+    whatsapp: '7906981852'
   },
   {
     id: 'nainital_package',
     name: 'Nainital Hill Station Tour – Lakes & Mountains',
     image:
-      'https://i.pinimg.com/1200x/65/cb/aa/65cbaa1f528cb47ee2eeb180bccc42aa.jpg',
+      'https://i.pinimg.com/1200x/24/d1/ac/24d1ac195a4faa475e6cfd9bfc9f8c23.jpg',
     description:
       'Visit Nainital, Bhimtal & Sattal with full sightseeing, boating and beautiful scenic photography locations.',
     features: [
@@ -30,7 +30,7 @@ const packages = [
       'Scenic Photography Spots',
       'Beautifull Trail Walks'
     ],
-    whatsapp: '9027070879'
+    whatsapp: '7906981852'
   }
 ]
 

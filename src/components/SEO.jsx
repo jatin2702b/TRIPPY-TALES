@@ -22,7 +22,7 @@ export default function SEO() {
       />
       <meta
         property="og:image"
-        content="https://i.pinimg.com/1200x/65/cb/aa/65cbaa1f528cb47ee2eeb180bccc42aa.jpg"
+        content=" https://i.pinimg.com/1200x/24/d1/ac/24d1ac195a4faa475e6cfd9bfc9f8c23.jpg"
       />
       <meta property="og:image:width" content="1200" />
       <meta property="og:image:height" content="630" />
