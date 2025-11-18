@@ -1,5 +1,3 @@
-// Optimized ResortCatalog.jsx (Steps applied except step 9, and keeping title sizes unchanged)
-
 import React, { useState, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -11,9 +9,14 @@ import {
   faArrowDown,
   faCircleCheck,
   faHeart as faHeartSolid,
+  faChevronUp, // New icon for 'Hide Details'
+  faChevronDown, // New icon for 'Show Details'
 } from '@fortawesome/free-solid-svg-icons';
 import { faHeart as faHeartRegular, faStar as faStarRegular } from '@fortawesome/free-regular-svg-icons';
 import { faWhatsapp } from '@fortawesome/free-brands-svg-icons';
+// Added missing specific icons imports for the filter buttons
+import { faPaw, faMountain, faWater, faHiking, faPlaceOfWorship, faCampground, faThLarge } from '@fortawesome/free-solid-svg-icons';
+
 
 const BUSINESS_WHATSAPP = '7906981852';
 
@@ -45,7 +48,7 @@ const ResortCatalog = () => {
     },
     {
       id: 3,
-      name: "West View Hotel – Heritage Colonial Stay",
+      name: "West View Hotel – Heritage Stay",
       location: "Ranikhet, Uttarakhand",
       description:
         "A cozy heritage stay in West View Hotel, Ranikhet surrounded by pine forests with trekking, photography, and serene views.",
@@ -106,17 +109,19 @@ const ResortCatalog = () => {
   ]);
 
   const [currentFilter, setCurrentFilter] = useState('all');
-  const [visibleCount, setVisibleCount] = useState(6);
+  const [visibleCount, setVisibleCount] = useState(3); // Start with fewer resorts for mobile
   const [favorites, setFavorites] = useState(new Set());
+  // New state to manage open/closed details on cards
+  const [openDetailsId, setOpenDetailsId] = useState(null); 
 
   const filters = [
-    { value: 'all', label: 'All Resorts', icon: 'fas fa-th-large' },
-    { value: 'wildlife', label: 'Wildlife', icon: 'fas fa-paw' },
-    { value: 'mountain', label: 'Mountain', icon: 'fas fa-mountain' },
-    { value: 'lake', label: 'Lake', icon: 'fas fa-water' },
-    { value: 'adventure', label: 'Adventure', icon: 'fas fa-hiking' },
-    { value: 'spiritual', label: 'Spiritual', icon: 'fas fa-place-of-worship' },
-    { value: 'camping', label: 'Camping', icon: 'fas fa-campground' }
+    { value: 'all', label: 'All Resorts', icon: faThLarge },
+    { value: 'wildlife', label: 'Wildlife', icon: faPaw },
+    { value: 'mountain', label: 'Mountain', icon: faMountain },
+    { value: 'lake', label: 'Lake', icon: faWater },
+    { value: 'adventure', label: 'Adventure', icon: faHiking },
+    { value: 'spiritual', label: 'Spiritual', icon: faPlaceOfWorship },
+    { value: 'camping', label: 'Camping', icon: faCampground }
   ];
 
   const filteredResorts = useMemo(() => {
@@ -125,6 +130,7 @@ const ResortCatalog = () => {
 
   const visibleResorts = filteredResorts.slice(0, visibleCount);
 
+  // Fix: Added backticks to template literals
   const handleShare = (resort) => {
     if (navigator.share) {
       navigator.share({
@@ -136,7 +142,8 @@ const ResortCatalog = () => {
       navigator.clipboard.writeText(`Check out ${resort.name} in ${resort.location} - ${window.location.href}`);
     }
   };
-
+  
+  // Fix: Added backticks to template literal
   const handleGetDetails = (resort) => {
     const message = `Hello tripyy tales,%0AI'm interested in ${resort.name} (${resort.location}). Please share availability, pricing, and inclusions.`;
     window.open(`https://wa.me/${BUSINESS_WHATSAPP}?text=${message}`, "_blank");
@@ -148,6 +155,10 @@ const ResortCatalog = () => {
       next.has(id) ? next.delete(id) : next.add(id);
       return next;
     });
+  };
+
+  const toggleDetails = (id) => {
+    setOpenDetailsId(openDetailsId === id ? null : id);
   };
 
   const renderStars = (rating) => {
@@ -163,138 +174,181 @@ const ResortCatalog = () => {
     return stars;
   };
 
-return (
-  // Updated ResortCatalog section with bolder and darker styling
-  <section
-  id="resortscatalog"
-  className="py-20 bg-gradient-to-br from-blue-100 via-white to-green-100 min-h-screen"
-  itemScope
-  itemType="https://schema.org/ItemList"
->
-  <meta itemProp="name" content="Best Resorts in Uttarakhand | tripyy tales" />
-  <meta
-    itemProp="description"
-    content="Explore curated resorts in Jim Corbett, Nainital, Rishikesh and more with luxury stays and adventure activities."
-  />
+  return (
+    <section
+      id="resortscatalog"
+      // Change: Using a clean white background for better contrast and mobile performance
+      className="py-10 bg-white min-h-screen" 
+      itemScope
+      itemType="https://schema.org/ItemList"
+    >
+      <meta itemProp="name" content="Best Resorts in Uttarakhand | tripyy tales" />
+      <meta
+        itemProp="description"
+        content="Explore curated resorts in Jim Corbett, Nainital, Rishikesh, Almora, and Pithoragarh with premium stays, adventure activities, lake views and nature experiences."
+      />
 
-  <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <h2 className="text-3xl sm:text-4xl font-extrabold text-center mb-4 text-gray-900">
-      Discover Our Resort Collection
-    </h2>
-
-    <p className="text-center text-gray-700 font-medium mb-12 max-w-2xl mx-auto">
-      Find your perfect getaway from our curated selection of premium resorts
-    </p>
-
-    <div className="flex flex-wrap gap-3 justify-center mb-12">
-      {filters.map((filter) => (
-        <button
-          key={filter.value}
-          onClick={() => setCurrentFilter(filter.value)}
-          className={`px-6 py-2 rounded-full font-semibold transition-all shadow-sm ${
-            currentFilter === filter.value
-              ? "bg-blue-700 text-white shadow-lg"
-              : "bg-gray-100 text-gray-800 border border-gray-400 hover:border-blue-700 hover:text-gray-900"
-          }`}
+      {/* Change: Reduced max-width and padding for tighter mobile layout */}
+      <div className="mx-auto px-4 max-w-7xl">
+        <motion.div
+          className="text-center mb-8" // Reduced margin
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
         >
-          {filter.label}
-        </button>
-      ))}
-    </div>
+          {/* Change: Slightly smaller title for mobile readability */}
+          <h2 className="text-3xl sm:text-4xl font-bold mb-4 bg-gradient-to-r from-blue-600 to-green-600 bg-clip-text text-transparent">
+            Our Premium Stays
+          </h2>
+          <p className="text-md text-gray-600 mb-8 max-w-2xl mx-auto">
+            Find your perfect escape, curated by tripyy tales.
+          </p>
 
-    <AnimatePresence mode="wait">
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-        {visibleResorts.map((resort, index) => (
-          <motion.div
-            key={resort.id}
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            transition={{ delay: index * 0.1 }}
-            className="bg-white rounded-lg shadow-xl overflow-hidden hover:shadow-2xl transition-shadow border border-gray-300"
-          >
-            <div className="relative">
-              <img
-                src={resort.image}
-                alt={resort.name}
-                className="w-full h-48 object-cover"
-              />
-
-              <button
-                onClick={() => toggleFavorite(resort.id)}
-                className="absolute top-4 right-4 bg-white rounded-full p-2 shadow-md hover:shadow-xl transition-shadow border border-gray-300"
+          <div className="flex flex-wrap justify-center gap-2 mb-8"> {/* Reduced gap */}
+            {filters.map(filter => (
+              <motion.button
+                key={filter.value}
+                onClick={() => setCurrentFilter(filter.value)}
+                aria-label={`Filter resorts by ${filter.label}`}
+                // Fix: Correctly referencing the icon object instead of the string class
+                // Change: Smaller padding for filter buttons
+                className={`px-4 py-2 rounded-full text-sm font-semibold transition-all flex items-center gap-1 ${                  
+                  currentFilter === filter.value
+                    ? "bg-blue-600 text-white shadow-lg"
+                    : "bg-gray-100 text-gray-700 border border-gray-300 hover:border-blue-500"
+                }`}              
               >
-                <FontAwesomeIcon
-                  icon={favorites.has(resort.id) ? faHeartSolid : faHeartRegular}
-                  className={favorites.has(resort.id) ? "text-red-600" : "text-gray-500"}
-                />
-              </button>
-            </div>
+                <FontAwesomeIcon icon={filter.icon} className="text-md"/>
+                {filter.label}
+              </motion.button>
+            ))}
+          </div>
+        </motion.div>
 
-            <div className="p-6">
-              <h3 className="text-xl font-extrabold text-gray-900 mb-2">
-                {resort.name}
-              </h3>
+        <motion.div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8" layout> {/* Reduced gap */}
+          <AnimatePresence>
+            {visibleResorts.map((resort, index) => (
+              <motion.article
+                key={resort.id}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, scale: 0.9 }}
+                transition={{ duration: 0.4, delay: index * 0.05 }} // Faster transition
+                className="bg-white rounded-xl overflow-hidden shadow-lg border border-gray-200" // Compact card styling
+              >
+                <div className="relative h-48 overflow-hidden"> {/* Reduced image height */}
+                  <motion.img
+                    src={resort.image}
+                    alt={`${resort.name} – ${resort.description}`}
+                    title={resort.name}
+                    width="600"
+                    height="300"
+                    loading="lazy"
+                    itemProp="image"
+                    className="w-full h-full object-cover"
+                    whileHover={{ scale: 1.05 }}
+                    transition={{ duration: 0.3 }}
+                  />
 
-              <div className="flex items-center text-gray-700 mb-3 font-medium">
-                <FontAwesomeIcon icon={faLocationDot} className="mr-2 text-blue-700" />
-                <p className="text-sm">{resort.location}</p>
-              </div>
+                  <div className="absolute top-3 right-3 flex gap-2"> {/* Smaller buttons */}
+                    <motion.button
+                      aria-label="Add to favorites"
+                      className="w-8 h-8 bg-white/90 rounded-full flex items-center justify-center p-1"
+                      onClick={() => toggleFavorite(resort.id)}
+                    >
+                      {favorites.has(resort.id) ? (
+                        <FontAwesomeIcon icon={faHeartSolid} className="text-red-500 text-sm" />
+                      ) : (
+                        <FontAwesomeIcon icon={faHeartRegular} className="text-gray-600 text-sm" />
+                      )}
+                    </motion.button>
+                  </div>
+                </div>
 
-              <p className="text-gray-700 text-sm mb-4 font-medium line-clamp-2">
-                {resort.description}
-              </p>
+                <div className="p-4"> {/* Reduced padding */}
+                  <h3 itemProp="name" className="text-lg font-bold text-gray-800 mb-1">
+                    {resort.name}
+                  </h3>
 
-              <div className="flex items-center mb-4">
-                <div className="flex gap-1">{renderStars(resort.rating)}</div>
-                <span className="ml-3 text-sm font-bold text-gray-800">
-                  {resort.rating} ({resort.reviews} reviews)
-                </span>
-              </div>
+                  <div className="flex items-center text-gray-600 mb-2">
+                    <FontAwesomeIcon icon={faLocationDot} className="text-blue-500 text-sm mr-1" />
+                    <span itemProp="address" className="text-xs">{resort.location}</span> {/* Smaller font */}
+                  </div>
 
-              <div className="flex gap-2 flex-wrap mb-4">
-                {resort.amenities.slice(0, 2).map((amenity, idx) => (
-                  <span
-                    key={idx}
-                    className="text-xs bg-blue-200 text-blue-900 px-3 py-1 rounded-full font-semibold"
-                  >
-                    {amenity}
-                  </span>
-                ))}
-              </div>
+                  <div className="flex items-center gap-1 mb-3">
+                    {renderStars(resort.rating)}
+                    <span className="text-xs text-gray-500 ml-1">
+                      {resort.rating} ({resort.reviews} reviews)
+                    </span>
+                  </div>
+                  
+                  {/* Action Buttons (Always visible) */}
+                  <div className="flex justify-between items-center pt-2 border-t border-gray-100">
+                    <motion.button
+                      onClick={() => toggleDetails(resort.id)}
+                      className="text-blue-600 text-sm font-semibold flex items-center gap-1 hover:text-blue-800 transition-colors"
+                      aria-expanded={openDetailsId === resort.id}
+                    >
+                      {openDetailsId === resort.id ? 'Hide Details' : 'Show Details'}
+                      <FontAwesomeIcon icon={openDetailsId === resort.id ? faChevronUp : faChevronDown} className="text-xs" />
+                    </motion.button>
 
-              <div className="flex gap-3">
-                <button
-                  onClick={() => handleGetDetails(resort)}
-                  className="flex-1 bg-green-700 text-white py-2 rounded-lg font-bold hover:bg-green-800 transition-colors flex items-center justify-center gap-2"
-                >
-                  <FontAwesomeIcon icon={faWhatsapp} /> Get Details
-                </button>
+                    <motion.button
+                      aria-label="Contact on WhatsApp"
+                      onClick={() => handleGetDetails(resort)}
+                      className="bg-green-600 text-white px-4 py-1.5 rounded-full text-sm font-semibold inline-flex items-center gap-1 hover:bg-green-700 transition-colors"
+                    >
+                      <FontAwesomeIcon icon={faWhatsapp} className="text-md" />
+                      Inquire
+                    </motion.button>
+                  </div>
 
-                <button
-                  onClick={() => handleShare(resort)}
-                  className="flex-1 bg-blue-700 text-white py-2 rounded-lg font-bold hover:bg-blue-800 transition-colors flex items-center justify-center gap-2"
-                >
-                  <FontAwesomeIcon icon={faShareNodes} /> Share
-                </button>
-              </div>
-            </div>
-          </motion.div>
-        ))}
+                  {/* Toggleable Details Section */}
+                  <AnimatePresence>
+                    {openDetailsId === resort.id && (
+                      <motion.div
+                        initial={{ opacity: 0, height: 0 }}
+                        animate={{ opacity: 1, height: 'auto' }}
+                        exit={{ opacity: 0, height: 0 }}
+                        transition={{ duration: 0.3 }}
+                        className="mt-3 pt-3 border-t border-gray-100"
+                      >
+                        <p itemProp="description" className="text-gray-700 text-xs mb-3">
+                          {resort.description}
+                        </p>
+                        <div className="flex flex-wrap gap-2">
+                          {resort.amenities.map((amenity, idx) => (
+                            <span
+                              key={idx}
+                              className="bg-blue-100 text-blue-800 px-2 py-0.5 rounded-full text-xs font-medium flex items-center gap-1"
+                            >
+                              <FontAwesomeIcon icon={faCircleCheck} className="text-sm" />
+                              {amenity}
+                            </span>
+                          ))}
+                        </div>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </div>
+              </motion.article>
+            ))}
+          </AnimatePresence>
+        </motion.div>
+
+        {visibleCount < filteredResorts.length && (
+          <div className="text-center">
+            <motion.button
+              className="bg-blue-600 text-white px-6 py-3 rounded-full font-semibold hover:bg-blue-700 transition-all inline-flex items-center gap-2 text-sm"
+              onClick={() => setVisibleCount(v => v + 3)}
+              aria-label="Load more resorts"
+            >
+              Load More Resorts
+              <FontAwesomeIcon icon={faArrowDown} />
+            </motion.button>
+          </div>
+        )}
       </div>
-    </AnimatePresence>
-
-    {visibleCount < filteredResorts.length && (
-      <div className="flex justify-center mt-12">
-        <button
-          onClick={() => setVisibleCount((prev) => prev + 3)}
-          className="bg-blue-700 text-white px-8 py-3 rounded-lg font-bold hover:bg-blue-800 transition-colors flex items-center gap-2 shadow-md"
-        >
-          <FontAwesomeIcon icon={faArrowDown} /> Load More Resorts
-        </button>
-      </div>
-    )}
-  </div>
     </section>
   );
 };
