@@ -17,12 +17,12 @@ const chatbotResponses = {
     "We plan end-to-end: hotels/resorts, transfers, permits, guides, and activities. Tell me dates, group size, and preferred vibe (wildlife, lakes, trek, spiritual), and I’ll draft options!"
   ],
   booking: [
-    "Booking is easy! 📞 Call/WhatsApp 9027070879 to reserve. A small advance confirms your plan; we share vouchers and a detailed itinerary.",
-    "To book, ping 9027070879 on WhatsApp or call directly. We’ll confirm slots (hotel/safari/trek), take a token advance, and send your plan."
+    "Booking is easy! 📞 Call/WhatsApp 7906981852 to reserve. A small advance confirms your plan; we share vouchers and a detailed itinerary.",
+    "To book, ping 7906981852 on WhatsApp or call directly. We’ll confirm slots (hotel/safari/trek), take a token advance, and send your plan."
   ],
   contact: [
-    "📞 9027070879\n✉️ trippytalesofficial@gmail.com\n📸 Instagram: @trippytales__official\n💬 WhatsApp us for the fastest response!",
-    "Reach us anytime: 9027070879 (call/WhatsApp), trippytalesofficial@gmail.com, Instagram @trippytales__official. We’ll respond quickly!"
+    "📞 7906981852\n✉️ trippytalesofficial@gmail.com\n📸 Instagram: @trippytales__official\n💬 WhatsApp us for the fastest response!",
+    "Reach us anytime: 7906981852 (call/WhatsApp), trippytalesofficial@gmail.com, Instagram @trippytales__official. We’ll respond quickly!"
   ],
   corbett: [
     "Corbett is perfect for wildlife lovers! 🐅 We serve Dhikuli (resorts), Ramnagar (main gate), and Jhirna Range (open year-round). Ask for jeep safari + stay combos.",
