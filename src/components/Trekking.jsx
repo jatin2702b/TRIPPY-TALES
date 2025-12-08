@@ -308,29 +308,38 @@ export default function Trekking() {
             className="fixed inset-0 z-40 flex items-center justify-center bg-black/60 px-3 sm:px-4"
             onClick={handleBackdropClick}
           >
-            <div className="bg-white w-full max-w-lg rounded-2xl shadow-2xl overflow-hidden max-h-[80vh] flex flex-col">
+            <div
+              className="
+                bg-white w-full max-w-md sm:max-w-lg
+                rounded-2xl shadow-2xl overflow-hidden
+                max-h-[70vh] sm:max-h-[65vh]
+                flex flex-col
+              "
+            >
+              {/* Header */}
               <div className="flex items-start justify-between px-4 sm:px-5 pt-4 pb-2 border-b border-gray-100">
                 <div>
-                  <h3 className="text-lg sm:text-xl font-bold text-gray-900">
+                  <h3 className="text-base sm:text-lg font-bold text-gray-900">
                     {selectedTrek.title}
                   </h3>
-                  <p className="text-xs sm:text-sm text-gray-500 mt-0.5">
+                  <p className="text-[11px] sm:text-xs text-gray-500 mt-0.5">
                     {selectedTrek.area}
                   </p>
-                  <p className="text-xs sm:text-sm text-emerald-700 font-medium mt-2">
+                  <p className="text-[11px] sm:text-xs text-emerald-700 font-medium mt-2">
                     Perfect for: {selectedTrek.bestFor}
                   </p>
                 </div>
                 <button
                   onClick={closeModal}
-                  className="ml-3 bg-gray-100 text-gray-700 hover:bg-gray-200 rounded-full w-8 h-8 flex items-center justify-center text-sm"
+                  className="ml-3 bg-gray-100 text-gray-700 hover:bg-gray-200 rounded-full w-7 h-7 flex items-center justify-center text-xs"
                   aria-label="Close trek details"
                 >
                   ✕
                 </button>
               </div>
 
-              <div className="px-4 sm:px-5 py-3 sm:py-4 overflow-y-auto text-xs sm:text-sm text-gray-700 space-y-4">
+              {/* Scrollable body */}
+              <div className="px-4 sm:px-5 py-3 sm:py-4 overflow-y-auto text-[11px] sm:text-sm text-gray-700 space-y-3">
                 {selectedTrek.details && (
                   <>
                     <div>
@@ -364,7 +373,7 @@ export default function Trekking() {
                     <li><strong>Stay:</strong> {selectedTrek.stay}</li>
                     <li><strong>Guide support:</strong> {selectedTrek.guides}</li>
                     {selectedTrek.notes && (
-                      <li className="text-gray-500 text-[11px] sm:text-xs">
+                      <li className="text-gray-500 text-[10px] sm:text-xs">
                         {selectedTrek.notes}
                       </li>
                     )}
@@ -372,10 +381,11 @@ export default function Trekking() {
                 </div>
               </div>
 
-              <div className="px-4 sm:px-5 py-3 border-t border-gray-100 flex justify-end">
+              {/* Footer */}
+              <div className="px-4 sm:px-5 py-2 sm:py-3 border-t border-gray-100 flex justify-end">
                 <button
                   onClick={closeModal}
-                  className="inline-flex items-center justify-center px-4 py-2 rounded-full text-xs sm:text-sm font-semibold border border-gray-300 text-gray-800 hover:bg-gray-100"
+                  className="inline-flex items-center justify-center px-3 sm:px-4 py-1.5 sm:py-2 rounded-full text-[11px] sm:text-sm font-semibold border border-gray-300 text-gray-800 hover:bg-gray-100"
                 >
                   Close details
                 </button>
